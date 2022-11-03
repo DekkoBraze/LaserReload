@@ -5,35 +5,37 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static int energy;
-    private bool _isItOver;
-    private BoxCollider _collider;
-    [SerializeField] private Tile players_tile;
+    // _playersTile - тайл, который в данный момент находится под игроком
+    [SerializeField] private Tile _playersTile;
     [SerializeField] private Manager _manager;
+
+    public static int energy;
+    // _isItOver нужно для того, чтобы игрок не мог двигаться при входе в портал
+    private bool _isItOver;
+    
 
     void Start()
     {
-        _collider = GetComponent<BoxCollider>();
         _manager = FindObjectOfType<Manager>();
+        _isItOver = false;
         energy = 0;
         _manager.EnergyUpdate();
-        _isItOver = false;
         FirstTileSearch();
     }
-    public void Move(Tile tile)
+    public void NonEnemyClick(Tile tile)
     {
-        Vector2 tile_pos = tile.gameObject.transform.position;
-        string tile_tag = tile.gameObject.tag;
-        if (!_isItOver && (tile_pos.y == this.gameObject.transform.position.y && Mathf.Abs(tile_pos.x - this.gameObject.transform.position.x) == 1 ||
-            tile_pos.x == this.gameObject.transform.position.x && Mathf.Abs(tile_pos.y - this.gameObject.transform.position.y) == 1))
+        Vector2 tilePos = tile.gameObject.transform.position;
+        // в if высчитывается, может ли игрок походить на тайл
+        if (!_isItOver && (tilePos.y == this.gameObject.transform.position.y && Mathf.Abs(tilePos.x - this.gameObject.transform.position.x) == 1 ||
+            tilePos.x == this.gameObject.transform.position.x && Mathf.Abs(tilePos.y - this.gameObject.transform.position.y) == 1))
         {
-            this.gameObject.transform.position = tile_pos;
-            if (tile_tag == "Finish")
+            this.gameObject.transform.position = tilePos;
+            if (tile.type == Tile.TileType.Portal)
             {
                 _manager.CompleteTextAppear();
                 _isItOver = true;
             }
-            if (tile_tag == "Danger")
+            if (tile.type == Tile.TileType.Danger || tile.type == Tile.TileType.DangerPortal)
             {
                 _manager.OnPlayerDestroy();
                 Destroy(this.gameObject);
@@ -43,22 +45,24 @@ public class Player : MonoBehaviour
                 energy++;
                 _manager.EnergyUpdate();
             }
-            Destroy(players_tile.gameObject);
-            players_tile = tile;
+            // уничтожение предыдущего тайла под игроком и установка нового
+            Destroy(_playersTile.gameObject);
+            _playersTile = tile;
         }
     }
 
-    public bool EnemyHitCheck(Vector2 enemy_pos)
+    public bool EnemyHitCheck(Vector2 enemyPos)
     {
-        if (enemy_pos.y == this.gameObject.transform.position.y && Mathf.Abs(enemy_pos.x - this.gameObject.transform.position.x) <= energy)    
+        // проверка, может ли игрок поразить цель (по x и по y)
+        if (enemyPos.y == this.gameObject.transform.position.y && Mathf.Abs(enemyPos.x - this.gameObject.transform.position.x) <= energy)    
         {
-            energy = (int)(energy - Mathf.Abs(enemy_pos.x - this.gameObject.transform.position.x));
+            energy = (int)(energy - Mathf.Abs(enemyPos.x - this.gameObject.transform.position.x));
             _manager.EnergyUpdate();
             return true;
         }
-        else if (enemy_pos.x == this.gameObject.transform.position.x && Mathf.Abs(enemy_pos.y - this.gameObject.transform.position.y) <= energy)
+        else if (enemyPos.x == this.gameObject.transform.position.x && Mathf.Abs(enemyPos.y - this.gameObject.transform.position.y) <= energy)
         {
-            energy = (int)(energy - Mathf.Abs(enemy_pos.y - this.gameObject.transform.position.y));
+            energy = (int)(energy - Mathf.Abs(enemyPos.y - this.gameObject.transform.position.y));
             _manager.EnergyUpdate();
             return true;
         }
@@ -68,13 +72,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    // метод для поиска тайла под игроком во время старта сцены
     public void FirstTileSearch()
     {
         Vector2 point = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
         RaycastHit2D hit = Physics2D.Raycast(point, point);
         if (hit.collider != null)
         {
-            players_tile = hit.transform.gameObject.GetComponent<Tile>();
+            _playersTile = hit.transform.gameObject.GetComponent<Tile>();
         }
     }
 }

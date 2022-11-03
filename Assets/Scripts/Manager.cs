@@ -9,22 +9,13 @@ public class Manager : MonoBehaviour
     [SerializeField] private TMP_Text energyText;
     [SerializeField] private TMP_Text completeText;
     [SerializeField] private TMP_Text gameOverText;
-    public static List<Turret> turrets;
-
-    private void Awake()
-    {
-        Messenger.AddListener(GameEvent.DANGEROUS_TILES_UPDATE, EmptyVoid);
-        turrets = new List<Turret>();
-    }
+    // здесь хранятся спрайты для всех тайлов
+    public Sprite[] tileSprites;
 
     private void Start()
     {
         completeText.enabled = false;
         gameOverText.enabled = false;
-        foreach (Turret turret in turrets)
-        {
-          turret.DangerousTilesSpawn();
-        }
     }
 
     private void Update()
@@ -44,6 +35,7 @@ public class Manager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // метод для апдейта показателя энергии
     public void EnergyUpdate()
     {
         energyText.text = Player.energy.ToString();
@@ -59,13 +51,4 @@ public class Manager : MonoBehaviour
         StartCoroutine(GameOver());
     }
 
-    private void EmptyVoid()
-    {
-
-    }
-
-    private void OnDestroy()
-    {
-        Messenger.RemoveListener(GameEvent.DANGEROUS_TILES_UPDATE, EmptyVoid);
-    }
 }

@@ -1,4 +1,5 @@
 public static class GameEvent
 {
-    public const string DANGEROUS_TILES_UPDATE = "DANGEROUS_TILES_UPDATE";
+    // если требуется проверить и доспавнить Danger тайлы
+    public const string DANGER_TILES_UPDATE = "DANGER_TILES_UPDATE";
 }
