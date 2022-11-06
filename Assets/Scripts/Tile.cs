@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     private Manager _manager;
     // сюда складываются Danger тайлы этой турели
     private Tile[] _dangerTiles;
+    public Vector2[] _teleportTiles;
     // колличество спавнящихся Danger тайлов
     private int _dangerTilesNumber = 0;
 
@@ -25,13 +26,16 @@ public class Tile : MonoBehaviour
         Danger = 1,
         Portal = 2,
         DangerPortal = 3,
-        Turret = 4
+        Turret = 4,
+        MovableTurret = 5,
+        Rail = 6
     }
     public TileType type = TileType.EmptyTile;
 
     private void Awake()
     {
         Messenger.AddListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
+        Messenger.AddListener(GameEvent.NEXT_STEP, NextStep);
     }
 
     private void Start()
@@ -40,7 +44,7 @@ public class Tile : MonoBehaviour
         _manager = FindObjectOfType<Manager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (type == TileType.Turret)
+        if (type == TileType.Turret || type == TileType.MovableTurret)
         {
             _dangerTilesNumber = 2;
         }
@@ -56,7 +60,7 @@ public class Tile : MonoBehaviour
     {
         if (_player != null)
         {
-            if (type == TileType.Turret)
+            if (type == TileType.Turret || type == TileType.MovableTurret)
             {
                 EnemyClick();
             }
@@ -71,36 +75,25 @@ public class Tile : MonoBehaviour
     {
         if (_player.EnemyHitCheck(this.gameObject.transform.position))
         {
+            // смена хода для двигающихся тайлов
+            Manager.stepCount++;
+            Messenger.Broadcast(GameEvent.NEXT_STEP);
             // уничтожение Danger тайлов врага
             for (int i = 0; i < _dangerTilesNumber; i++)
             {
-                if (_dangerTiles[i] != null)
-                {
-                    if (_dangerTiles[i].gameObject.GetComponent<Tile>().type == TileType.Danger)
-                    {
-                        _dangerTiles[i].gameObject.GetComponent<Tile>().type = TileType.EmptyTile;
-                        _dangerTiles[i].gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.EmptyTile];
-                    }
-                    else if (_dangerTiles[i].gameObject.GetComponent<Tile>().type == TileType.DangerPortal)
-                    {
-                        _dangerTiles[i].gameObject.GetComponent<Tile>().type = TileType.Portal;
-                        _dangerTiles[i].gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.Portal];
-                    }
-                    _dangerTiles[i] = null;
-                }
+                DestroyDangerTile(_dangerTiles[i]);
             }
             _dangerTilesNumber = 0;
             // изменение типа врага на Empty
             type = TileType.EmptyTile;
             _spriteRenderer.sprite = _manager.tileSprites[(int)TileType.EmptyTile];
-            // запрос апдейта Danger тайлов
             Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
         }
     }
 
     private void DangerTilesSpawn()
     {
-        if (type == TileType.Turret)
+        if (type == TileType.Turret || type == TileType.MovableTurret)
         {
             // _isEnemyHere нужно для того, чтобы враги перекрывали Danger "лучи"
             bool _isEnemyHere = false;
@@ -190,8 +183,53 @@ public class Tile : MonoBehaviour
         }
     }
 
+    private void NextStep()
+    {
+        if (type == TileType.MovableTurret && _teleportTiles.Length > 0)
+        {
+            if (_teleportTiles[Manager.stepCount % _teleportTiles.Length] != null)
+            {
+                transform.position = _teleportTiles[Manager.stepCount % _teleportTiles.Length];
+                for (int num = 0; num < _dangerTiles.Length; num++)
+                {
+                    DestroyDangerTile(_dangerTiles[num]);
+                    
+                }
+                Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
+            }
+            else
+            {
+                transform.position = _teleportTiles[0];
+                for (int num = 0; num < _dangerTiles.Length; num++)
+                {
+                    DestroyDangerTile(_dangerTiles[num]);
+                }
+                Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         Messenger.RemoveListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
+        Messenger.RemoveListener(GameEvent.NEXT_STEP, NextStep);
+    }
+
+    private void DestroyDangerTile(Tile tile)
+    {
+        if (tile != null)
+        {
+            if (tile.gameObject.GetComponent<Tile>().type == TileType.Danger)
+            {
+                tile.gameObject.GetComponent<Tile>().type = TileType.EmptyTile;
+                tile.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.EmptyTile];
+            }
+            else if (tile.gameObject.GetComponent<Tile>().type == TileType.DangerPortal)
+            {
+                tile.gameObject.GetComponent<Tile>().type = TileType.Portal;
+                tile.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.Portal];
+            }
+            tile = null;
+        }
     }
 }

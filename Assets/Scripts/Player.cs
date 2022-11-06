@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
             tilePos.x == this.gameObject.transform.position.x && Mathf.Abs(tilePos.y - this.gameObject.transform.position.y) == 1))
         {
             this.gameObject.transform.position = tilePos;
+            // смена хода для двигающихся тайлов
+            Manager.stepCount++;
+            Messenger.Broadcast(GameEvent.NEXT_STEP);
             if (tile.type == Tile.TileType.Portal)
             {
                 _manager.CompleteTextAppear();

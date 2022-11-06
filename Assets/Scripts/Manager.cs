@@ -11,6 +11,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverText;
     // здесь хранятся спрайты для всех тайлов
     public Sprite[] tileSprites;
+    public static int stepCount = 0;
 
     private void Start()
     {
@@ -22,12 +23,14 @@ public class Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            stepCount = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
     public IEnumerator GameOver()
     {
+        stepCount = 0;
         gameOverText.enabled = true;
 
         yield return new WaitForSeconds(1);
