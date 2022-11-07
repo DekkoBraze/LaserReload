@@ -6,8 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // _playersTile - тайл, который в данный момент находится под игроком
-    [SerializeField] private Tile _playersTile;
+    [SerializeField] public Tile playersTile;
     [SerializeField] private Manager _manager;
+    private GameObject _tilesFolder;
 
     public static int energy;
     // _isItOver нужно для того, чтобы игрок не мог двигаться при входе в портал
@@ -17,14 +18,15 @@ public class Player : MonoBehaviour
     void Start()
     {
         _manager = FindObjectOfType<Manager>();
+        _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
         _isItOver = false;
         energy = 0;
         _manager.EnergyUpdate();
         FirstTileSearch();
     }
-    public void NonEnemyClick(Tile tile)
+    public void NonEnemyClick(Tile ClickedTile)
     {
-        Vector2 tilePos = tile.gameObject.transform.position;
+        Vector2 tilePos = ClickedTile.gameObject.transform.position;
         // в if высчитывается, может ли игрок походить на тайл
         if (!_isItOver && (tilePos.y == this.gameObject.transform.position.y && Mathf.Abs(tilePos.x - this.gameObject.transform.position.x) == 1 ||
             tilePos.x == this.gameObject.transform.position.x && Mathf.Abs(tilePos.y - this.gameObject.transform.position.y) == 1))
@@ -33,12 +35,12 @@ public class Player : MonoBehaviour
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
-            if (tile.type == Tile.TileType.Portal)
+            if (ClickedTile.type == Tile.TileType.Portal)
             {
                 _manager.CompleteTextAppear();
                 _isItOver = true;
             }
-            if (tile.type == Tile.TileType.Danger || tile.type == Tile.TileType.DangerPortal)
+            if (ClickedTile.type == Tile.TileType.Danger || ClickedTile.type == Tile.TileType.DangerPortal)
             {
                 _manager.OnPlayerDestroy();
                 Destroy(this.gameObject);
@@ -48,9 +50,10 @@ public class Player : MonoBehaviour
                 energy++;
                 _manager.EnergyUpdate();
             }
+            _tilesFolder.BroadcastMessage("CheckMovableTurretMove", ClickedTile);
             // уничтожение предыдущего тайла под игроком и установка нового
-            Destroy(_playersTile.gameObject);
-            _playersTile = tile;
+            Destroy(playersTile.gameObject);
+            playersTile = ClickedTile;
         }
     }
 
@@ -82,7 +85,7 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(point, point);
         if (hit.collider != null)
         {
-            _playersTile = hit.transform.gameObject.GetComponent<Tile>();
+            playersTile = hit.transform.gameObject.GetComponent<Tile>();
         }
     }
 }

@@ -9,7 +9,9 @@ public class Tile : MonoBehaviour
     private Manager _manager;
     // сюда складываются Danger тайлы этой турели
     private Tile[] _dangerTiles;
+    private Tile[] _oldDangerTiles;
     public Vector2[] _teleportTiles;
+    
     // колличество спавнящихся Danger тайлов
     private int _dangerTilesNumber = 0;
 
@@ -42,6 +44,7 @@ public class Tile : MonoBehaviour
     {
         _player = FindObjectOfType<Player>();
         _manager = FindObjectOfType<Manager>();
+        
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (type == TileType.Turret || type == TileType.MovableTurret)
@@ -50,6 +53,10 @@ public class Tile : MonoBehaviour
         }
 
         _dangerTiles = new Tile[_dangerTilesNumber];
+        if (type == TileType.MovableTurret)
+        {
+            _oldDangerTiles = new Tile[_dangerTilesNumber];
+        }
 
         _spriteRenderer.sprite = _manager.tileSprites[(int)type];
 
@@ -66,6 +73,7 @@ public class Tile : MonoBehaviour
             }
             else if (type == TileType.EmptyTile || type == TileType.Danger || type == TileType.Portal || type == TileType.DangerPortal)
             {
+                
                 _player.NonEnemyClick(this);
             }
         }
@@ -81,7 +89,7 @@ public class Tile : MonoBehaviour
             // уничтожение Danger тайлов врага
             for (int i = 0; i < _dangerTilesNumber; i++)
             {
-                DestroyDangerTile(_dangerTiles[i]);
+                DestroyDangerTile(this, _dangerTiles[i], i);
             }
             _dangerTilesNumber = 0;
             // изменение типа врага на Empty
@@ -192,7 +200,7 @@ public class Tile : MonoBehaviour
                 transform.position = _teleportTiles[Manager.stepCount % _teleportTiles.Length];
                 for (int num = 0; num < _dangerTiles.Length; num++)
                 {
-                    DestroyDangerTile(_dangerTiles[num]);
+                    DestroyDangerTile(this, _dangerTiles[num], num);
                     
                 }
                 Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
@@ -202,7 +210,7 @@ public class Tile : MonoBehaviour
                 transform.position = _teleportTiles[0];
                 for (int num = 0; num < _dangerTiles.Length; num++)
                 {
-                    DestroyDangerTile(_dangerTiles[num]);
+                    DestroyDangerTile(this, _dangerTiles[num], num);
                 }
                 Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
             }
@@ -215,10 +223,15 @@ public class Tile : MonoBehaviour
         Messenger.RemoveListener(GameEvent.NEXT_STEP, NextStep);
     }
 
-    private void DestroyDangerTile(Tile tile)
+    private void DestroyDangerTile(Tile turret, Tile tile, int num)
     {
         if (tile != null)
         {
+            // добавление уничтожаемого тайла в массив старых тайлов
+            if (turret.type == TileType.MovableTurret)
+            {
+                turret._oldDangerTiles[num] = tile;
+            }
             if (tile.gameObject.GetComponent<Tile>().type == TileType.Danger)
             {
                 tile.gameObject.GetComponent<Tile>().type = TileType.EmptyTile;
@@ -230,6 +243,25 @@ public class Tile : MonoBehaviour
                 tile.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.Portal];
             }
             tile = null;
+        }
+    }
+
+    public void CheckMovableTurretMove(Tile ClickedTile)
+    {
+        if (type == TileType.MovableTurret)
+        {
+            foreach (Tile oldPlayersPosition in _dangerTiles)
+            {
+                foreach (Tile newPlayersPosition in _oldDangerTiles)
+                {
+                    if (oldPlayersPosition == _player.playersTile && newPlayersPosition == ClickedTile)
+                    {
+                        Debug.Log("You were slashed by laser!");
+                        Destroy(_player.gameObject);
+                        _manager.OnPlayerDestroy();
+                    }
+                }
+            }
         }
     }
 }
