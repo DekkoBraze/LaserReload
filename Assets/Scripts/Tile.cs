@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private Player _player;
     private SpriteRenderer _spriteRenderer;
-    private Manager _manager;
     // сюда складываются Danger тайлы этой турели
     private Tile[] _dangerTiles;
     private Tile[] _oldDangerTiles;
@@ -41,10 +39,7 @@ public class Tile : MonoBehaviour
     }
 
     private void Start()
-    {
-        _player = FindObjectOfType<Player>();
-        _manager = FindObjectOfType<Manager>();
-        
+    {   
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (type == TileType.Turret || type == TileType.MovableTurret)
@@ -58,14 +53,14 @@ public class Tile : MonoBehaviour
             _oldDangerTiles = new Tile[_dangerTilesNumber];
         }
 
-        _spriteRenderer.sprite = _manager.tileSprites[(int)type];
+        _spriteRenderer.sprite = Manager.link.tileSprites[(int)type];
 
         DangerTilesSpawn();
     }
 
     public void OnMouseDown()
     {
-        if (_player != null)
+        if (Manager.playerLink != null)
         {
             if (type == TileType.Turret || type == TileType.MovableTurret)
             {
@@ -74,14 +69,14 @@ public class Tile : MonoBehaviour
             else if (type == TileType.EmptyTile || type == TileType.Danger || type == TileType.Portal || type == TileType.DangerPortal)
             {
                 
-                _player.NonEnemyClick(this);
+                Manager.playerLink.NonEnemyClick(this);
             }
         }
     }
 
     private void EnemyClick()
     {
-        if (_player.EnemyHitCheck(this.gameObject.transform.position))
+        if (Manager.playerLink.EnemyHitCheck(this.gameObject.transform.position))
         {
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
@@ -94,7 +89,7 @@ public class Tile : MonoBehaviour
             _dangerTilesNumber = 0;
             // изменение типа врага на Empty
             type = TileType.EmptyTile;
-            _spriteRenderer.sprite = _manager.tileSprites[(int)TileType.EmptyTile];
+            _spriteRenderer.sprite = Manager.link.tileSprites[(int)TileType.EmptyTile];
             Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
         }
     }
@@ -173,20 +168,20 @@ public class Tile : MonoBehaviour
             if (hits[0].collider.gameObject.GetComponent<Tile>().type == TileType.EmptyTile)
             {
                 hits[0].collider.gameObject.GetComponent<Tile>().type = TileType.Danger;
-                hits[0].collider.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.Danger];
+                hits[0].collider.gameObject.GetComponent<SpriteRenderer>().sprite = Manager.link.tileSprites[(int)TileType.Danger];
             }
             else if (hits[0].collider.gameObject.GetComponent<Tile>().type == TileType.Portal)
             {
                 hits[0].collider.gameObject.GetComponent<Tile>().type = TileType.DangerPortal;
-                hits[0].collider.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.DangerPortal];
+                hits[0].collider.gameObject.GetComponent<SpriteRenderer>().sprite = Manager.link.tileSprites[(int)TileType.DangerPortal];
             }
             _dangerTiles[i - 1] = hits[0].collider.gameObject.GetComponent<Tile>();
             // проверка того, стоит ли игрок на изменяемом тайле и gameOver в случае true
-            Vector2 player_pos = _player.transform.position;
+            Vector2 player_pos = Manager.playerLink.transform.position;
             if (pos == player_pos)
             {
-                _manager.OnPlayerDestroy();
-                Destroy(_player.gameObject);
+                Manager.link.OnPlayerDestroy();
+                Destroy(Manager.playerLink.gameObject);
             }
         }
     }
@@ -235,12 +230,12 @@ public class Tile : MonoBehaviour
             if (tile.gameObject.GetComponent<Tile>().type == TileType.Danger)
             {
                 tile.gameObject.GetComponent<Tile>().type = TileType.EmptyTile;
-                tile.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.EmptyTile];
+                tile.gameObject.GetComponent<SpriteRenderer>().sprite = Manager.link.tileSprites[(int)TileType.EmptyTile];
             }
             else if (tile.gameObject.GetComponent<Tile>().type == TileType.DangerPortal)
             {
                 tile.gameObject.GetComponent<Tile>().type = TileType.Portal;
-                tile.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.Portal];
+                tile.gameObject.GetComponent<SpriteRenderer>().sprite = Manager.link.tileSprites[(int)TileType.Portal];
             }
             tile = null;
         }
@@ -254,14 +249,20 @@ public class Tile : MonoBehaviour
             {
                 foreach (Tile newPlayersPosition in _oldDangerTiles)
                 {
-                    if (oldPlayersPosition == _player.playersTile && newPlayersPosition == ClickedTile)
+                    if (oldPlayersPosition == Manager.playerLink.playersTile && newPlayersPosition == ClickedTile)
                     {
                         Debug.Log("You were slashed by laser!");
-                        Destroy(_player.gameObject);
-                        _manager.OnPlayerDestroy();
+                        Destroy(Manager.playerLink.gameObject);
+                        Manager.link.OnPlayerDestroy();
                     }
                 }
             }
         }
     }
 }
+
+//Рефакторинг:
+//1. Разбить члены enum на отдельные классы с помощью паттерна State
+//2. Переместить NonEnemyClick в соответствующие классы
+//3. Попытаться отвязать как можно больше объектов друг от друга
+//4. Решить проблему того, что с каждым новым пополнением списка тайлов приходится менять список спрайтов

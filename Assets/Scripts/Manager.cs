@@ -9,6 +9,12 @@ public class Manager : MonoBehaviour
     [SerializeField] private TMP_Text energyText;
     [SerializeField] private TMP_Text completeText;
     [SerializeField] private TMP_Text gameOverText;
+
+    public static Manager link;
+    public static Player playerLink;
+
+    private GameObject _tilesFolder;
+
     // здесь хранятся спрайты для всех тайлов
     public Sprite[] tileSprites;
     public static int stepCount = 0;
@@ -17,6 +23,9 @@ public class Manager : MonoBehaviour
     {
         completeText.enabled = false;
         gameOverText.enabled = false;
+        _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
+        playerLink = FindObjectOfType<Player>();
+        link = this;
     }
 
     private void Update()
@@ -26,6 +35,12 @@ public class Manager : MonoBehaviour
             stepCount = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    public void StepChange()
+    {
+        stepCount++;
+        Messenger.Broadcast(GameEvent.NEXT_STEP);
     }
 
     public IEnumerator GameOver()
@@ -52,6 +67,11 @@ public class Manager : MonoBehaviour
     public void OnPlayerDestroy()
     {
         StartCoroutine(GameOver());
+    }
+
+    public void StartCheckMovableTurret(Tile ClickedTile)
+    {
+        _tilesFolder.BroadcastMessage("CheckMovableTurretMove", ClickedTile);
     }
 
 }
