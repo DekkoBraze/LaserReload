@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public interface IState
 {
+    void SetTile(Tile linkedTile);
     void SetListeners();
-    void Click(Tile clickedTile);
+    void Click();
     void SpriteUpdate();
-    void SetDangerTilesNumber();
+    void DangerTilesNumberUpdate();
     void DangerTilesSpawn();
-    void NextStep();
+    void NextMove();
     void DestroyListeners();
-    void DestroyDangerTile();
     void CheckMovableTurretMove();
 }

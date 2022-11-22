@@ -10,6 +10,9 @@ public class Manager : MonoBehaviour
     [SerializeField] private TMP_Text completeText;
     [SerializeField] private TMP_Text gameOverText;
 
+    public EmptyState emptyState;
+    public DangerState dangerState;
+
     public static Manager link;
     public static Player playerLink;
 
@@ -19,13 +22,19 @@ public class Manager : MonoBehaviour
     public Sprite[] tileSprites;
     public static int stepCount = 0;
 
+    private void Awake()
+    {
+        link = this;
+        emptyState = new EmptyState();
+        dangerState = new DangerState();
+    }
+
     private void Start()
     {
         completeText.enabled = false;
         gameOverText.enabled = false;
         _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
         playerLink = FindObjectOfType<Player>();
-        link = this;
     }
 
     private void Update()

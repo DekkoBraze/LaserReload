@@ -5,6 +5,9 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
+
+    public IState state;
+
     // сюда складываютс€ Danger тайлы этой турели
     private Tile[] _dangerTiles;
     private Tile[] _oldDangerTiles;
@@ -14,10 +17,10 @@ public class Tile : MonoBehaviour
     private int _dangerTilesNumber = 0;
 
     // константы углов дл€ спавна Danger
-    private readonly Vector3 angle0 = new Vector3(0, 0, 0);
-    private readonly Vector3 angle90 = new Vector3(0, 0, 90);
-    private readonly Vector3 angle180 = new Vector3(0, 0, 180);
-    private readonly Vector3 angle270 = new Vector3(0, 0, 270);
+    public readonly Vector3 angle0 = new Vector3(0, 0, 0);
+    public readonly Vector3 angle90 = new Vector3(0, 0, 90);
+    public readonly Vector3 angle180 = new Vector3(0, 0, 180);
+    public readonly Vector3 angle270 = new Vector3(0, 0, 270);
 
     // перечисление типов тайла (по-умолчанию Empty)
     public enum TileType
@@ -53,6 +56,7 @@ public class Tile : MonoBehaviour
             _oldDangerTiles = new Tile[_dangerTilesNumber];
         }
 
+        Debug.Log(Manager.link);
         _spriteRenderer.sprite = Manager.link.tileSprites[(int)type];
 
         DangerTilesSpawn();
@@ -94,7 +98,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void DangerTilesSpawn()
+    public void DangerTilesSpawn()
     {
         if (type == TileType.Turret || type == TileType.MovableTurret)
         {
@@ -142,7 +146,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void DangerTilesCheck(Vector2 pos, int i, out bool isEnemyHere)
+    public void DangerTilesCheck(Vector2 pos, int i, out bool isEnemyHere)
     {
         bool canPlaceTile = false;
         isEnemyHere = false;
@@ -212,6 +216,30 @@ public class Tile : MonoBehaviour
         }
     }
 
+    public void SetSprite(int spriteNum)
+    {
+        _spriteRenderer.sprite = Manager.link.tileSprites[spriteNum];
+    }
+
+    public void SetDangerTilesNumber(int tilesNum)
+    {
+        _dangerTilesNumber = tilesNum;
+        if (tilesNum != 0)
+        {
+            _dangerTiles = new Tile[_dangerTilesNumber];
+        }
+    }
+
+    public int GetDangerTilesNumber()
+    {
+        return _dangerTilesNumber;
+    }
+
+    public Tile[] GetDangerTilesArray()
+    {
+        return _dangerTiles;
+    }
+
     private void OnDestroy()
     {
         Messenger.RemoveListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
@@ -266,3 +294,4 @@ public class Tile : MonoBehaviour
 //2. ѕереместить NonEnemyClick в соответствующие классы
 //3. ѕопытатьс€ отв€зать как можно больше объектов друг от друга
 //4. –ешить проблему того, что с каждым новым пополнением списка тайлов приходитс€ мен€ть список спрайтов
+//5. ѕодумать над тем, чтобы сделать отдельные состо€ни€ и дл€ углов поворота
