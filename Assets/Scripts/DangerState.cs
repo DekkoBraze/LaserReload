@@ -36,11 +36,11 @@ public class DangerState : MonoBehaviour, IState
     }
     public void DangerTilesNumberUpdate()
     {
-        tile.SetDangerTilesNumber(0);
+        tile._dangerTilesNumber = 0;
     }
     public void SetListeners() { }
     public void DangerTilesSpawn() { }
     public void NextMove() { }
     public void DestroyListeners() { }
-    public void CheckMovableTurretMove() { }
+    public void CheckMovableTurretMove(Tile clickedTile) { }
 }

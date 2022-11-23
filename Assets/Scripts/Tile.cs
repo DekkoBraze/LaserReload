@@ -9,12 +9,24 @@ public class Tile : MonoBehaviour
     public IState state;
 
     // сюда складываются Danger тайлы этой турели
-    private Tile[] _dangerTiles;
-    private Tile[] _oldDangerTiles;
-    public Vector2[] _teleportTiles;
+    public Tile[] _dangerTiles { get; set; }
+    public Tile[] _oldDangerTiles { get; set; }
+    public Vector2[] _teleportTiles { get; set; }
     
     // колличество спавнящихся Danger тайлов
-    private int _dangerTilesNumber = 0;
+    private int _trueDangerTilesNumber;
+    public int _dangerTilesNumber 
+    {
+        get { return _dangerTilesNumber; } 
+        set 
+        {
+            _dangerTilesNumber = value;
+            if (value != 0)
+            {
+                _dangerTiles = new Tile[_dangerTilesNumber];
+            }
+        } 
+    }
 
     // константы углов для спавна Danger
     public readonly Vector3 angle0 = new Vector3(0, 0, 0);
@@ -221,25 +233,6 @@ public class Tile : MonoBehaviour
         _spriteRenderer.sprite = Manager.link.tileSprites[spriteNum];
     }
 
-    public void SetDangerTilesNumber(int tilesNum)
-    {
-        _dangerTilesNumber = tilesNum;
-        if (tilesNum != 0)
-        {
-            _dangerTiles = new Tile[_dangerTilesNumber];
-        }
-    }
-
-    public int GetDangerTilesNumber()
-    {
-        return _dangerTilesNumber;
-    }
-
-    public Tile[] GetDangerTilesArray()
-    {
-        return _dangerTiles;
-    }
-
     private void OnDestroy()
     {
         Messenger.RemoveListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
@@ -295,3 +288,5 @@ public class Tile : MonoBehaviour
 //3. Попытаться отвязать как можно больше объектов друг от друга
 //4. Решить проблему того, что с каждым новым пополнением списка тайлов приходится менять список спрайтов
 //5. Подумать над тем, чтобы сделать отдельные состояния и для углов поворота
+//6. Подумать над тем, чтобы сделать отдельные состояния опасный/неопасный для всех видов тайлов
+//7. Сделать везде адекватную инкапсуляцию

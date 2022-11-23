@@ -12,13 +12,11 @@ public class Player : MonoBehaviour
 
     public static int energy;
     // _isItOver нужно для того, чтобы игрок не мог двигаться при входе в портал
-    private bool _isItOver;
     
 
     void Start()
     {
         _manager = FindObjectOfType<Manager>();
-        _isItOver = false;
         energy = 0;
         Manager.link.EnergyUpdate();
         FirstTileSearch();
@@ -26,7 +24,7 @@ public class Player : MonoBehaviour
 
     public bool MoveCheck(Vector2 tilePos)
     {
-        if (!_isItOver && (tilePos.y == this.gameObject.transform.position.y && Mathf.Abs(tilePos.x - this.gameObject.transform.position.x) == 1 ||
+        if (!Manager.link.isItOver && (tilePos.y == this.gameObject.transform.position.y && Mathf.Abs(tilePos.x - this.gameObject.transform.position.x) == 1 ||
             tilePos.x == this.gameObject.transform.position.x && Mathf.Abs(tilePos.y - this.gameObject.transform.position.y) == 1))
         {
             return true;
@@ -67,7 +65,7 @@ public class Player : MonoBehaviour
             if (ClickedTile.type == Tile.TileType.Portal)
             {
                 _manager.CompleteTextAppear();
-                _isItOver = true;
+                Manager.link.isItOver = true;
             }
             if (ClickedTile.type == Tile.TileType.Danger || ClickedTile.type == Tile.TileType.DangerPortal)
             {

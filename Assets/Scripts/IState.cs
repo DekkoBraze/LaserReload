@@ -11,5 +11,5 @@ public interface IState
     void DangerTilesSpawn();
     void NextMove();
     void DestroyListeners();
-    void CheckMovableTurretMove();
+    void CheckMovableTurretMove(Tile clickedTile);
 }

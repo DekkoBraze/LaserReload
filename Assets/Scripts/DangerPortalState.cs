@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyState : MonoBehaviour, IState
+public class DangerPortalState : MonoBehaviour, IState
 {
     Tile tile;
     public void SetTile(Tile linkedTile)
@@ -18,6 +18,8 @@ public class EmptyState : MonoBehaviour, IState
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
+            Manager.link.OnPlayerDestroy();
+            Manager.playerLink.PlayerDestroy();
             if (Player.energy < 4)
             {
                 Player.energy++;
@@ -30,7 +32,7 @@ public class EmptyState : MonoBehaviour, IState
     }
     public void SpriteUpdate()
     {
-        tile.SetSprite(0);
+        tile.SetSprite(3);
     }
     public void DangerTilesNumberUpdate()
     {

@@ -12,6 +12,8 @@ public class Manager : MonoBehaviour
 
     public EmptyState emptyState;
     public DangerState dangerState;
+    public PortalState portalState;
+    public DangerPortalState dangerPortalState;
 
     public static Manager link;
     public static Player playerLink;
@@ -21,6 +23,7 @@ public class Manager : MonoBehaviour
     // здесь хранятся спрайты для всех тайлов
     public Sprite[] tileSprites;
     public static int stepCount = 0;
+    public bool isItOver;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
+        isItOver = false;
         completeText.enabled = false;
         gameOverText.enabled = false;
         _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
