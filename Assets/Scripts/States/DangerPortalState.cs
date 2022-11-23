@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalState : MonoBehaviour, IState
+public class DangerPortalState : IState
 {
-    Tile tile;
-    public void SetTile(Tile linkedTile)
-    {
-        tile = linkedTile;
-    }
-    public void Click()
+    public void Click(Tile tile)
     {
         Vector2 tilePos = tile.transform.position;
         if (Manager.playerLink.MoveCheck(tilePos))
@@ -18,8 +13,8 @@ public class PortalState : MonoBehaviour, IState
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
-            Manager.link.CompleteTextAppear();
-            Manager.link.isItOver = true;
+            Manager.link.OnPlayerDestroy();
+            Manager.playerLink.PlayerDestroy();
             if (Player.energy < 4)
             {
                 Player.energy++;
@@ -30,17 +25,20 @@ public class PortalState : MonoBehaviour, IState
             Manager.playerLink.PlayerTileChange(tile);
         }
     }
-    public void SpriteUpdate()
+    public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(2);
+        tile.SetSprite(3);
     }
-    public void DangerTilesNumberUpdate()
+    public void DangerTilesNumberUpdate(Tile tile)
     {
         tile._dangerTilesNumber = 0;
     }
-    public void SetListeners() { }
-    public void DangerTilesSpawn() { }
-    public void NextMove() { }
-    public void DestroyListeners() { }
-    public void CheckMovableTurretMove(Tile clickedTile) { }
+    public void DangerTilesSpawn(Tile tile) { }
+    public void NextMove(Tile tile) { }
+    public void ChangeStateOnDanger(Tile hit) { }
+    public void ChangeStateOnSafe(Tile tile)
+    {
+        tile.state = Manager.link.portalState;
+        tile.SetSprite(2);
+    }
 }

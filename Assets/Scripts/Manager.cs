@@ -14,6 +14,9 @@ public class Manager : MonoBehaviour
     public DangerState dangerState;
     public PortalState portalState;
     public DangerPortalState dangerPortalState;
+    public TurretState turretState;
+    public MovableTurretState movableTurretState;
+    public RailState railState;
 
     public static Manager link;
     public static Player playerLink;
@@ -22,14 +25,34 @@ public class Manager : MonoBehaviour
 
     // здесь хранятся спрайты для всех тайлов
     public Sprite[] tileSprites;
+    public IState[] states;
     public static int stepCount = 0;
     public bool isItOver;
 
     private void Awake()
     {
         link = this;
+
+        states = new IState[7];
         emptyState = new EmptyState();
+        states[0] = emptyState;
         dangerState = new DangerState();
+        states[1] = dangerState;
+        portalState = new PortalState();
+        states[2] = portalState;
+        dangerPortalState = new DangerPortalState();
+        states[3] = dangerPortalState;
+        turretState = new TurretState();
+        states[4] = turretState;
+        movableTurretState = new MovableTurretState();
+        states[5] = movableTurretState;
+        railState = new RailState();
+        states[6] = railState;
+
+        _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
+        playerLink = FindObjectOfType<Player>();
+
+        Messenger.Broadcast(GameEvent.SET_STATE);
     }
 
     private void Start()
@@ -37,8 +60,6 @@ public class Manager : MonoBehaviour
         isItOver = false;
         completeText.enabled = false;
         gameOverText.enabled = false;
-        _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
-        playerLink = FindObjectOfType<Player>();
     }
 
     private void Update()

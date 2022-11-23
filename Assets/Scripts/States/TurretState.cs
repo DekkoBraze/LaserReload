@@ -2,20 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretState : MonoBehaviour, IState
+public class TurretState : IState
 {
-    Tile tile;
-    public void SetTile(Tile linkedTile)
+    public void Click(Tile tile)
     {
-        tile = linkedTile;
-    }
-    public void SetListeners()
-    {
-        Messenger.AddListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
-    }
-    public void Click()
-    {
-        if (Manager.playerLink.EnemyHitCheck(this.gameObject.transform.position))
+        if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
         {
             int dangersNum = tile._dangerTilesNumber;
             Tile[] dangers = tile._dangerTiles;
@@ -39,44 +30,44 @@ public class TurretState : MonoBehaviour, IState
             Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
         }
     }
-    public void SpriteUpdate()
+    public void SpriteUpdate(Tile tile)
     {
         tile.SetSprite(4);
     }
-    public void DangerTilesNumberUpdate()
+    public void DangerTilesNumberUpdate(Tile tile)
     {
         tile._dangerTilesNumber = 2;
     }
-    public void DangerTilesSpawn() 
+    public void DangerTilesSpawn(Tile tile) 
     {
         int dangersNum = tile._dangerTilesNumber;
         // _isEnemyHere íóæíî äëÿ òîãî, ÷òîáû âğàãè ïåğåêğûâàëè Danger "ëó÷è"
         bool _isEnemyHere = false;
         for (int tileNum = 1; tileNum <= dangersNum; tileNum++)
         {
-            if (transform.rotation.eulerAngles == tile.angle0)
+            if (tile.gameObject.transform.rotation.eulerAngles == tile.angle0)
             {
-                Vector2 pos = new Vector2(transform.position.x - tileNum, transform.position.y);
+                Vector2 pos = new Vector2(tile.gameObject.transform.position.x - tileNum, tile.gameObject.transform.position.y);
                 //ÌÅÒÎÄ Â ÒÀÉËÅ ÍÓÆÍÎ ÎÒĞÅÄÀÊÒÈĞÎÂÀÒÜ!!!
-                tile.DangerTilesCheck(pos, tileNum, out _isEnemyHere);
+                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
                 if (_isEnemyHere)
                 {
                     break;
                 }
             }
-            else if (transform.rotation.eulerAngles == tile.angle90)
+            else if (tile.gameObject.transform.rotation.eulerAngles == tile.angle90)
             {
-                Vector2 pos = new Vector2(transform.position.x, transform.position.y - tileNum);
-                tile.DangerTilesCheck(pos, tileNum, out _isEnemyHere);
+                Vector2 pos = new Vector2(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y - tileNum);
+                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
                 if (_isEnemyHere)
                 {
                     break;
                 }
             }
-            else if (transform.rotation.eulerAngles == tile.angle180)
+            else if (tile.gameObject.transform.rotation.eulerAngles == tile.angle180)
             {
-                Vector2 pos = new Vector2(transform.position.x + tileNum, transform.position.y);
-                tile.DangerTilesCheck(pos, tileNum, out _isEnemyHere);
+                Vector2 pos = new Vector2(tile.gameObject.transform.position.x + tileNum, tile.gameObject.transform.position.y);
+                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
                 if (_isEnemyHere)
                 {
                     break;
@@ -84,8 +75,8 @@ public class TurretState : MonoBehaviour, IState
             }
             else
             {
-                Vector2 pos = new Vector2(transform.position.x, transform.position.y + tileNum);
-                tile.DangerTilesCheck(pos, tileNum, out _isEnemyHere);
+                Vector2 pos = new Vector2(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y + tileNum);
+                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
                 if (_isEnemyHere)
                 {
                     break;
@@ -93,10 +84,9 @@ public class TurretState : MonoBehaviour, IState
             }
         }
     }
-    public void NextMove() { }
-    public void DestroyListeners() 
-    {
-        Messenger.RemoveListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
-    }
-    public void CheckMovableTurretMove(Tile clickedTile) { }
+
+    public void PlaceTile(Tile tile) { }
+    public void NextMove(Tile tile) { }
+    public void ChangeStateOnDanger(Tile hit) { }
+    public void ChangeStateOnSafe(Tile tile) { }
 }
