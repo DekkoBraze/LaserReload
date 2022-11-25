@@ -4,43 +4,57 @@ using UnityEngine;
 
 public class EmptyState : IState
 {
-    private int safeSprite = 0;
-    private int dangerSprite = 1;
+    private int spriteNum = 0;
 
     public void Click(Tile tile)
     {
         Vector2 tilePos = tile.transform.position;
         if (Manager.playerLink.MoveCheck(tilePos))
         {
+            Manager.link.clickedTile = tile;
             Manager.playerLink.PlayerChangePosition(tilePos);
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
-            tile.dangerState.DestroyPlayerOrNot();
+            Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
+            if (tile.isDanger)
+            {
+                Manager.link.OnPlayerDestroy();
+                Manager.playerLink.PlayerDestroy();
+            }
             if (Player.energy < 4)
             {
                 Player.energy++;
                 Manager.link.EnergyUpdate();
             }
-            Manager.link.StartCheckMovableTurret(tile);
+            Messenger.Broadcast(GameEvent.CHECK_MOVABLE_TURRET);
             // уничтожение предыдущего тайла под игроком и установка нового
             Manager.playerLink.PlayerTileChange(tile);
         }
     }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(0);
+        tile.SetSprite(spriteNum);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
         tile._dangerTilesNumber = 0;
     }
+    public void ChangeOnDanger(Tile tile)
+    {
+        tile.isDanger = true;
+        tile.SetDangerSprite(spriteNum);
+    }
+    public void ChangeOnSafe(Tile tile)
+    {
+        tile.isDanger = false;
+        tile.SetSprite(spriteNum);
+    }
     public void DangerTilesSpawn(Tile tile) { }
     public void NextMove(Tile tile) { }
-    public void ChangeStateOnDanger(Tile hit)
+    public void CheckMovableTurretMove(Tile tile) { }
+    public int GetSpriteNum()
     {
-        hit.state = Manager.link.dangerState;
-        hit.SetSprite(1);
+        return spriteNum;
     }
-    public void ChangeStateOnSafe(Tile tile) { }
 }

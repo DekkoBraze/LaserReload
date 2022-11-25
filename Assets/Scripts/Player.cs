@@ -51,38 +51,6 @@ public class Player : MonoBehaviour
         playersTile = ClickedTile;
     }
 
-
-    public void NonEnemyClick(Tile ClickedTile)
-    {
-        Vector2 tilePos = ClickedTile.gameObject.transform.position;
-        // в if высчитывается, может ли игрок походить на тайл
-        if (MoveCheck(tilePos))
-        {
-            PlayerChangePosition(tilePos);
-            // смена хода для двигающихся тайлов
-            Manager.stepCount++;
-            Messenger.Broadcast(GameEvent.NEXT_STEP);
-            if (ClickedTile.type == Tile.TileType.Portal)
-            {
-                _manager.CompleteTextAppear();
-                Manager.link.isItOver = true;
-            }
-            if (ClickedTile.type == Tile.TileType.Danger || ClickedTile.type == Tile.TileType.DangerPortal)
-            {
-                _manager.OnPlayerDestroy();
-                PlayerDestroy();
-            }
-            if (energy < 4)
-            {
-                energy++;
-                Manager.link.EnergyUpdate();
-            }
-            _manager.StartCheckMovableTurret(ClickedTile);
-            // уничтожение предыдущего тайла под игроком и установка нового
-            PlayerTileChange(ClickedTile);
-        }
-    }
-
     public bool EnemyHitCheck(Vector2 enemyPos)
     {
         // проверка, может ли игрок поразить цель (по x и по y)

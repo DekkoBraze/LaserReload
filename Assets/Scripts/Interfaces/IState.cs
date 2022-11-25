@@ -9,6 +9,9 @@ public interface IState
     void DangerTilesNumberUpdate(Tile tile);
     void DangerTilesSpawn(Tile tile);
     void NextMove(Tile tile);
-    void ChangeStateOnDanger(Tile tile);
-    void ChangeStateOnSafe(Tile tile);
+    void ChangeOnDanger(Tile tile);
+    void ChangeOnSafe(Tile tile);
+    void CheckMovableTurretMove(Tile tile);
+    int GetSpriteNum();
+
 }

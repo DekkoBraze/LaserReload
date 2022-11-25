@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour
 
     public IState state;
     public IAngle angle;
-    public IDanger dangerState;
+    public bool isDanger;
 
     // сюда складываются Danger тайлы этой турели
     public Tile[] _dangerTiles;
@@ -41,12 +41,10 @@ public class Tile : MonoBehaviour
     public enum TileType
     {
         EmptyTile = 0,
-        Danger = 1,
-        Portal = 2,
-        DangerPortal = 3,
-        Turret = 4,
-        MovableTurret = 5,
-        Rail = 6
+        Portal = 1,
+        Turret = 2,
+        MovableTurret = 3,
+        Rail = 4
     }
     public TileType type;
 
@@ -55,13 +53,12 @@ public class Tile : MonoBehaviour
         Messenger.AddListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawnAwake);
         Messenger.AddListener(GameEvent.NEXT_STEP, NextMoveAwake);
         Messenger.AddListener(GameEvent.SET_STATE, SetState);
+        Messenger.AddListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove);
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
-        state.DangerTilesNumberUpdate(this);
-        state.SpriteUpdate(this);
         if (transform.eulerAngles == new Vector3(0, 0, 0))
         {
             angle = Manager.link.angle0;
@@ -72,14 +69,13 @@ public class Tile : MonoBehaviour
         }
         else if (transform.eulerAngles == new Vector3(0, 0, 180))
         {
-
             angle = Manager.link.angle180;
         }
         else
         {
-
             angle = Manager.link.angle270;
         }
+        state.DangerTilesNumberUpdate(this);
         state.DangerTilesSpawn(this);
     }
 
@@ -114,8 +110,9 @@ public class Tile : MonoBehaviour
         }
         if (canPlaceTile)
         {
-            hits[0].collider.gameObject.GetComponent<Tile>().state.ChangeStateOnDanger(hits[0].collider.gameObject.GetComponent<Tile>());
-            _dangerTiles[i - 1] = hits[0].collider.gameObject.GetComponent<Tile>();
+            Tile hitTile = hits[0].collider.gameObject.GetComponent<Tile>();
+            hitTile.state.ChangeOnDanger(hitTile);
+            _dangerTiles[i - 1] = hitTile;
             // проверка того, стоит ли игрок на изменяемом тайле и gameOver в случае true
             Vector2 player_pos = Manager.playerLink.transform.position;
             if (pos == player_pos)
@@ -139,6 +136,8 @@ public class Tile : MonoBehaviour
     private void SetState()
     {
         state = Manager.link.states[(int)type];
+        SetSprite(state.GetSpriteNum());
+        isDanger = false;
     }
 
     private void DangerTilesSpawnAwake()
@@ -151,20 +150,9 @@ public class Tile : MonoBehaviour
         state.NextMove(this);
     }
 
-    public void CheckMovableTurretMove(Tile clickedTile)
+    public void AwakeCheckMovableTurretMove()
     {
-        foreach (Tile oldPlayersPosition in _dangerTiles)
-        {
-            foreach (Tile newPlayersPosition in _oldDangerTiles)
-            {
-                if (oldPlayersPosition == Manager.playerLink.playersTile && newPlayersPosition == clickedTile)
-                {
-                    Debug.Log("You were slashed by laser!");
-                    Manager.playerLink.PlayerDestroy();
-                    Manager.link.OnPlayerDestroy();
-                }
-            }
-        }
+        state.CheckMovableTurretMove(this);
     }
 
     private void OnDestroy()
@@ -172,6 +160,7 @@ public class Tile : MonoBehaviour
         Messenger.RemoveListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawnAwake);
         Messenger.RemoveListener(GameEvent.NEXT_STEP, NextMoveAwake);
         Messenger.RemoveListener(GameEvent.SET_STATE, SetState);
+        Messenger.RemoveListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove); 
     }
 }
 
@@ -181,6 +170,7 @@ public class Tile : MonoBehaviour
 //3. Попытаться отвязать как можно больше объектов друг от друга - ВЫПОЛНЕНО
 //4. Решить проблему того, что с каждым новым пополнением списка тайлов приходится менять список спрайтов - НЕВЫПОЛНЯЕМО
 //5. Подумать над тем, чтобы сделать отдельные состояния и для углов поворота - ВЫПОЛНЕНО
-//6. Подумать над тем, чтобы сделать отдельные состояния опасный/неопасный для всех видов тайлов
+//6. Подумать над тем, чтобы сделать отдельные состояния опасный/неопасный для всех видов тайлов - ВЫПОЛНЕНО
 //7. Сделать везде адекватную инкапсуляцию
 //8. Сделать необязательную подписку на события для компонентов, которым это не нужно
+//9. Объединить послания мессенджера о следующем ходе в одно послание

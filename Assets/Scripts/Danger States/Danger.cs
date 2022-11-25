@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Danger : IDanger
 {
-    public void ChangeDangerState(Tile tile, int spriteNum)
-    {
-        tile.SetSprite(spriteNum);
-    }
-
     public void DestroyPlayerOrNot()
     {
         Manager.link.OnPlayerDestroy();

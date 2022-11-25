@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovableTurretState : IState
 {
+    private int spriteNum = 3;
     public void Click(Tile tile)
     {
         if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
@@ -18,8 +19,8 @@ public class MovableTurretState : IState
             {
                 if (dangers[i] != null)
                 {
-                    dangers[i].gameObject.GetComponent<Tile>().state = Manager.link.emptyState;
-                    dangers[i].gameObject.GetComponent<SpriteRenderer>().sprite = Manager.link.tileSprites[0];
+                    Tile dangerTile = dangers[i].gameObject.GetComponent<Tile>();
+                    dangerTile.state.ChangeOnSafe(dangerTile);
                     dangers[i] = null;
                 }
             }
@@ -32,7 +33,7 @@ public class MovableTurretState : IState
     }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(5);
+        tile.SetSprite(spriteNum);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
@@ -72,14 +73,35 @@ public class MovableTurretState : IState
             {
                 if (dangers[num] != null)
                 {
-                    tile._oldDangerTiles[num] = tile;
-                    dangers[num].state.ChangeStateOnSafe(dangers[num]);
+                    tile._oldDangerTiles[num] = dangers[num];
+                    Tile dangerTile = dangers[num].gameObject.GetComponent<Tile>();
+                    dangerTile.state.ChangeOnSafe(dangerTile);
                     dangers[num] = null;
                 }
             }
             Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
         }
     }
-    public void ChangeStateOnDanger(Tile hit) { }
-    public void ChangeStateOnSafe(Tile tile) { }
+    public void ChangeOnDanger(Tile tile) { }
+    public void ChangeOnSafe(Tile tile) { }
+    public void CheckMovableTurretMove(Tile tile)
+    {
+        foreach (Tile oldPlayersPosition in tile._dangerTiles)
+        {
+            foreach (Tile newPlayersPosition in tile._oldDangerTiles)
+            {
+                if (oldPlayersPosition == Manager.playerLink.playersTile && newPlayersPosition == Manager.link.clickedTile)
+                {
+                    Debug.Log("You were slashed by laser!");
+                    Manager.playerLink.PlayerDestroy();
+                    Manager.link.OnPlayerDestroy();
+                    break;
+                }
+            }
+        }
+    }
+    public int GetSpriteNum()
+    {
+        return spriteNum;
+    }
 }

@@ -11,12 +11,13 @@ public class Manager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverText;
 
     public EmptyState emptyState;
-    public DangerState dangerState;
     public PortalState portalState;
-    public DangerPortalState dangerPortalState;
     public TurretState turretState;
     public MovableTurretState movableTurretState;
     public RailState railState;
+
+    public Danger dangerState;
+    public NonDanger nonDangerState;
 
     public Angle0 angle0;
     public Angle90 angle90;
@@ -25,6 +26,8 @@ public class Manager : MonoBehaviour
 
     public static Manager link;
     public static Player playerLink;
+
+    public Tile clickedTile;
 
     private GameObject _tilesFolder;
 
@@ -39,21 +42,20 @@ public class Manager : MonoBehaviour
     {
         link = this;
 
-        states = new IState[7];
+        states = new IState[5];
         emptyState = new EmptyState();
         states[0] = emptyState;
-        dangerState = new DangerState();
-        states[1] = dangerState;
         portalState = new PortalState();
-        states[2] = portalState;
-        dangerPortalState = new DangerPortalState();
-        states[3] = dangerPortalState;
+        states[1] = portalState;
         turretState = new TurretState();
-        states[4] = turretState;
+        states[2] = turretState;
         movableTurretState = new MovableTurretState();
-        states[5] = movableTurretState;
+        states[3] = movableTurretState;
         railState = new RailState();
-        states[6] = railState;
+        states[4] = railState;
+
+        dangerState = new Danger();
+        nonDangerState = new NonDanger();
 
         angle0 = new Angle0();
         angle90 = new Angle90();
@@ -113,10 +115,4 @@ public class Manager : MonoBehaviour
     {
         StartCoroutine(GameOver());
     }
-
-    public void StartCheckMovableTurret(Tile ClickedTile)
-    {
-        _tilesFolder.BroadcastMessage("CheckMovableTurretMove", ClickedTile);
-    }
-
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TurretState : IState
 {
+    private int spriteNum = 2;
     public void Click(Tile tile)
     {
         if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
@@ -18,9 +19,9 @@ public class TurretState : IState
             {
                 if (dangers[i] != null)
                 {
-                dangers[i].gameObject.GetComponent<Tile>().state = Manager.link.emptyState;
-                dangers[i].gameObject.GetComponent<SpriteRenderer>().sprite = Manager.link.tileSprites[0];
-                dangers[i] = null;
+                    Tile dangerTile = dangers[i].gameObject.GetComponent<Tile>();
+                    dangerTile.state.ChangeOnSafe(dangerTile);
+                    dangers[i] = null;
                 }
             }
             tile._dangerTilesNumber = 0;
@@ -32,7 +33,7 @@ public class TurretState : IState
     }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(4);
+        tile.SetSprite(spriteNum);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
@@ -53,9 +54,12 @@ public class TurretState : IState
             }
         }
     }
-
-    public void PlaceTile(Tile tile) { }
+    public void ChangeOnDanger(Tile tile) { }
+    public void ChangeOnSafe(Tile tile) { }
     public void NextMove(Tile tile) { }
-    public void ChangeStateOnDanger(Tile hit) { }
-    public void ChangeStateOnSafe(Tile tile) { }
+    public void CheckMovableTurretMove(Tile tile) { }
+    public int GetSpriteNum()
+    {
+        return spriteNum;
+    }
 }

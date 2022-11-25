@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class RailState : IState
 {
+    private int spriteNum = 4;
     public void Click(Tile tile) { }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(6);
+        tile.SetSprite(spriteNum);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
@@ -15,7 +16,12 @@ public class RailState : IState
     }
     public void DangerTilesSpawn(Tile tile) { }
     public void NextMove(Tile tile) { }
-    public void ChangeStateOnDanger(Tile hit) { }
-    public void ChangeStateOnSafe(Tile tile) { }
+    public void ChangeOnDanger(Tile tile) { }
+    public void ChangeOnSafe(Tile tile) { }
+    public void CheckMovableTurretMove(Tile tile) { }
+    public int GetSpriteNum()
+    {
+        return spriteNum;
+    }
 }
 

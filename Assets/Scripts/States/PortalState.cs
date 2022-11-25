@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PortalState : IState
 {
+    private int spriteNum = 1;
     public void Click(Tile tile)
     {
         Vector2 tilePos = tile.transform.position;
         if (Manager.playerLink.MoveCheck(tilePos))
         {
+            Manager.link.clickedTile = tile;
             Manager.playerLink.PlayerChangePosition(tilePos);
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
@@ -20,25 +22,34 @@ public class PortalState : IState
                 Player.energy++;
                 Manager.link.EnergyUpdate();
             }
-            Manager.link.StartCheckMovableTurret(tile);
+            Messenger.Broadcast(GameEvent.CHECK_MOVABLE_TURRET);
             // уничтожение предыдущего тайла под игроком и установка нового
             Manager.playerLink.PlayerTileChange(tile);
         }
     }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(2);
+        tile.SetSprite(spriteNum);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
         tile._dangerTilesNumber = 0;
     }
+    public void ChangeOnDanger(Tile tile)
+    {
+        tile.isDanger = true;
+        tile.SetDangerSprite(spriteNum);
+    }
+    public void ChangeOnSafe(Tile tile)
+    {
+        tile.isDanger = false;
+        tile.SetSprite(spriteNum);
+    }
     public void DangerTilesSpawn(Tile tile) { }
     public void NextMove(Tile tile) { }
-    public void ChangeStateOnDanger(Tile tile)
+    public void CheckMovableTurretMove(Tile tile) { }
+    public int GetSpriteNum()
     {
-        tile.state = Manager.link.dangerPortalState;
-        tile.SetSprite(3);
+        return spriteNum;
     }
-    public void ChangeStateOnSafe(Tile tile) { }
 }
