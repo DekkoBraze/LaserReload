@@ -7,6 +7,8 @@ public class Tile : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     public IState state;
+    public IAngle angle;
+    public IDanger dangerState;
 
     // сюда складываются Danger тайлы этой турели
     public Tile[] _dangerTiles;
@@ -60,6 +62,24 @@ public class Tile : MonoBehaviour
     {
         state.DangerTilesNumberUpdate(this);
         state.SpriteUpdate(this);
+        if (transform.eulerAngles == new Vector3(0, 0, 0))
+        {
+            angle = Manager.link.angle0;
+        }
+        else if (transform.eulerAngles == new Vector3(0, 0, 90))
+        {
+            angle = Manager.link.angle90;
+        }
+        else if (transform.eulerAngles == new Vector3(0, 0, 180))
+        {
+
+            angle = Manager.link.angle180;
+        }
+        else
+        {
+
+            angle = Manager.link.angle270;
+        }
         state.DangerTilesSpawn(this);
     }
 
@@ -111,6 +131,11 @@ public class Tile : MonoBehaviour
         _spriteRenderer.sprite = Manager.link.tileSprites[spriteNum];
     }
 
+    public void SetDangerSprite(int spriteNum)
+    {
+        _spriteRenderer.sprite = Manager.link.dangerTileSprites[spriteNum];
+    }
+
     private void SetState()
     {
         state = Manager.link.states[(int)type];
@@ -151,11 +176,11 @@ public class Tile : MonoBehaviour
 }
 
 //Рефакторинг:
-//1. Разбить члены enum на отдельные классы с помощью паттерна State
-//2. Переместить NonEnemyClick в соответствующие классы
-//3. Попытаться отвязать как можно больше объектов друг от друга
-//4. Решить проблему того, что с каждым новым пополнением списка тайлов приходится менять список спрайтов
-//5. Подумать над тем, чтобы сделать отдельные состояния и для углов поворота
+//1. Разбить члены enum на отдельные классы с помощью паттерна State - ВЫПОЛНЕНО
+//2. Переместить NonEnemyClick в соответствующие классы - ВЫПОЛНЕНО
+//3. Попытаться отвязать как можно больше объектов друг от друга - ВЫПОЛНЕНО
+//4. Решить проблему того, что с каждым новым пополнением списка тайлов приходится менять список спрайтов - НЕВЫПОЛНЯЕМО
+//5. Подумать над тем, чтобы сделать отдельные состояния и для углов поворота - ВЫПОЛНЕНО
 //6. Подумать над тем, чтобы сделать отдельные состояния опасный/неопасный для всех видов тайлов
 //7. Сделать везде адекватную инкапсуляцию
-//8. Сделать необязательную подписку на события, для компонентов, которым это не нужно
+//8. Сделать необязательную подписку на события для компонентов, которым это не нужно

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EmptyState : IState
 {
+    private int safeSprite = 0;
+    private int dangerSprite = 1;
+
     public void Click(Tile tile)
     {
         Vector2 tilePos = tile.transform.position;
@@ -13,6 +16,7 @@ public class EmptyState : IState
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
+            tile.dangerState.DestroyPlayerOrNot();
             if (Player.energy < 4)
             {
                 Player.energy++;

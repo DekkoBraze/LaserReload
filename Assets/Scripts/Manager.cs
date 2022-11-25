@@ -18,6 +18,11 @@ public class Manager : MonoBehaviour
     public MovableTurretState movableTurretState;
     public RailState railState;
 
+    public Angle0 angle0;
+    public Angle90 angle90;
+    public Angle180 angle180;
+    public Angle270 angle270;
+
     public static Manager link;
     public static Player playerLink;
 
@@ -25,6 +30,7 @@ public class Manager : MonoBehaviour
 
     // здесь хранятся спрайты для всех тайлов
     public Sprite[] tileSprites;
+    public Sprite[] dangerTileSprites;
     public IState[] states;
     public static int stepCount = 0;
     public bool isItOver;
@@ -48,6 +54,11 @@ public class Manager : MonoBehaviour
         states[5] = movableTurretState;
         railState = new RailState();
         states[6] = railState;
+
+        angle0 = new Angle0();
+        angle90 = new Angle90();
+        angle180 = new Angle180();
+        angle270 = new Angle270();
 
         _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
         playerLink = FindObjectOfType<Player>();

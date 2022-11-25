@@ -45,42 +45,11 @@ public class MovableTurretState : IState
         bool _isEnemyHere = false;
         for (int tileNum = 1; tileNum <= dangersNum; tileNum++)
         {
-            if (tile.gameObject.transform.rotation.eulerAngles == tile.angle0)
+            Vector2 pos = tile.angle.TilePos(tile.gameObject.transform.position, tileNum);
+            tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
+            if (_isEnemyHere)
             {
-                Vector2 pos = new Vector2(tile.gameObject.transform.position.x - tileNum, tile.gameObject.transform.position.y);
-                //ÌÅÒÎÄ Â ÒÀÉËÅ ÍÓÆÍÎ ÎÒÐÅÄÀÊÒÈÐÎÂÀÒÜ!!!
-                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
-                if (_isEnemyHere)
-                {
-                    break;
-                }
-            }
-            else if (tile.gameObject.transform.rotation.eulerAngles == tile.angle90)
-            {
-                Vector2 pos = new Vector2(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y - tileNum);
-                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
-                if (_isEnemyHere)
-                {
-                    break;
-                }
-            }
-            else if (tile.gameObject.transform.rotation.eulerAngles == tile.angle180)
-            {
-                Vector2 pos = new Vector2(tile.gameObject.transform.position.x + tileNum, tile.gameObject.transform.position.y);
-                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
-                if (_isEnemyHere)
-                {
-                    break;
-                }
-            }
-            else
-            {
-                Vector2 pos = new Vector2(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y + tileNum);
-                tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
-                if (_isEnemyHere)
-                {
-                    break;
-                }
+                break;
             }
         }
     }
