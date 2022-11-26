@@ -26,7 +26,7 @@ public class TurretState : IState
             }
             tile._dangerTilesNumber = 0;
             // изменение типа врага на Empty
-            tile.state = Manager.link.emptyState;
+            tile.state = Manager.emptyState;
             tile.SetSprite(0);
             Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
         }

@@ -17,9 +17,9 @@ public class PortalState : IState
             Messenger.Broadcast(GameEvent.NEXT_STEP);
             Manager.link.CompleteTextAppear();
             Manager.link.isItOver = true;
-            if (Player.energy < 4)
+            if (Manager.playerLink.energy < 4)
             {
-                Player.energy++;
+                Manager.playerLink.energy++;
                 Manager.link.EnergyUpdate();
             }
             Messenger.Broadcast(GameEvent.CHECK_MOVABLE_TURRET);

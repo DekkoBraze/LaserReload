@@ -10,33 +10,29 @@ public class Manager : MonoBehaviour
     [SerializeField] private TMP_Text completeText;
     [SerializeField] private TMP_Text gameOverText;
 
-    public EmptyState emptyState;
-    public PortalState portalState;
-    public TurretState turretState;
-    public MovableTurretState movableTurretState;
-    public RailState railState;
+    public static EmptyState emptyState;
+    public static PortalState portalState;
+    public static TurretState turretState;
+    public static MovableTurretState movableTurretState;
+    public static RailState railState;
 
-    public Danger dangerState;
-    public NonDanger nonDangerState;
-
-    public Angle0 angle0;
-    public Angle90 angle90;
-    public Angle180 angle180;
-    public Angle270 angle270;
+    public static Angle0 angle0;
+    public static Angle90 angle90;
+    public static Angle180 angle180;
+    public static Angle270 angle270;
 
     public static Manager link;
     public static Player playerLink;
 
-    public Tile clickedTile;
-
-    private GameObject _tilesFolder;
-
     // здесь хранятся спрайты для всех тайлов
     public Sprite[] tileSprites;
     public Sprite[] dangerTileSprites;
+
     public IState[] states;
-    public static int stepCount = 0;
-    public bool isItOver;
+
+    public Tile clickedTile { get; set; }
+    public static int stepCount { get; set; } = 0;
+    public bool isItOver { get; set; }
 
     private void Awake()
     {
@@ -54,15 +50,11 @@ public class Manager : MonoBehaviour
         railState = new RailState();
         states[4] = railState;
 
-        dangerState = new Danger();
-        nonDangerState = new NonDanger();
-
         angle0 = new Angle0();
         angle90 = new Angle90();
         angle180 = new Angle180();
         angle270 = new Angle270();
 
-        _tilesFolder = GameObject.FindGameObjectWithTag("Folder");
         playerLink = FindObjectOfType<Player>();
 
         Messenger.Broadcast(GameEvent.SET_STATE);
@@ -103,7 +95,7 @@ public class Manager : MonoBehaviour
     // метод для апдейта показателя энергии
     public void EnergyUpdate()
     {
-        energyText.text = Player.energy.ToString();
+        energyText.text = Manager.playerLink.energy.ToString();
     }
 
     public void CompleteTextAppear()

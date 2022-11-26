@@ -16,15 +16,14 @@ public class EmptyState : IState
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
-            Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
             if (tile.isDanger)
             {
                 Manager.link.OnPlayerDestroy();
                 Manager.playerLink.PlayerDestroy();
             }
-            if (Player.energy < 4)
+            if (Manager.playerLink.energy < 4)
             {
-                Player.energy++;
+                Manager.playerLink.energy++;
                 Manager.link.EnergyUpdate();
             }
             Messenger.Broadcast(GameEvent.CHECK_MOVABLE_TURRET);

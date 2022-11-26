@@ -7,16 +7,11 @@ public class Player : MonoBehaviour
 {
     // _playersTile - тайл, который в данный момент находится под игроком
     [SerializeField] public Tile playersTile;
-    [SerializeField] private Manager _manager;
 
-
-    public static int energy;
-    // _isItOver нужно для того, чтобы игрок не мог двигаться при входе в портал
-    
+    public int energy { get; set; }
 
     void Start()
     {
-        _manager = FindObjectOfType<Manager>();
         energy = 0;
         Manager.link.EnergyUpdate();
         FirstTileSearch();

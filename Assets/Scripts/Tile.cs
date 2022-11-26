@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour
 
     public IState state;
     public IAngle angle;
-    public bool isDanger;
+    public bool isDanger { get; set; }
 
     // сюда складываются Danger тайлы этой турели
     public Tile[] _dangerTiles;
@@ -31,13 +31,7 @@ public class Tile : MonoBehaviour
         } 
     }
 
-    // константы углов для спавна Danger
-    public readonly Vector3 angle0 = new Vector3(0, 0, 0);
-    public readonly Vector3 angle90 = new Vector3(0, 0, 90);
-    public readonly Vector3 angle180 = new Vector3(0, 0, 180);
-    public readonly Vector3 angle270 = new Vector3(0, 0, 270);
-
-    // перечисление типов тайла (по-умолчанию Empty)
+    // перечисление типов тайла (по-умолчанию Empty) - сделано для того, чтобы состояние можно было выбирать в инспекторе
     public enum TileType
     {
         EmptyTile = 0,
@@ -61,19 +55,19 @@ public class Tile : MonoBehaviour
     {
         if (transform.eulerAngles == new Vector3(0, 0, 0))
         {
-            angle = Manager.link.angle0;
+            angle = Manager.angle0;
         }
         else if (transform.eulerAngles == new Vector3(0, 0, 90))
         {
-            angle = Manager.link.angle90;
+            angle = Manager.angle90;
         }
         else if (transform.eulerAngles == new Vector3(0, 0, 180))
         {
-            angle = Manager.link.angle180;
+            angle = Manager.angle180;
         }
         else
         {
-            angle = Manager.link.angle270;
+            angle = Manager.angle270;
         }
         state.DangerTilesNumberUpdate(this);
         state.DangerTilesSpawn(this);
@@ -95,7 +89,7 @@ public class Tile : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.CircleCastAll(pos, 0.1f, new Vector2(0, 0));
         foreach (RaycastHit2D obj in hits)
         {
-            if (obj.collider.gameObject.GetComponent<Tile>().state == Manager.link.turretState)
+            if (obj.collider.gameObject.GetComponent<Tile>().state == Manager.turretState)
             {
                 canPlaceTile = false;
                 isEnemyHere = true;
@@ -171,6 +165,6 @@ public class Tile : MonoBehaviour
 //4. Решить проблему того, что с каждым новым пополнением списка тайлов приходится менять список спрайтов - НЕВЫПОЛНЯЕМО
 //5. Подумать над тем, чтобы сделать отдельные состояния и для углов поворота - ВЫПОЛНЕНО
 //6. Подумать над тем, чтобы сделать отдельные состояния опасный/неопасный для всех видов тайлов - ВЫПОЛНЕНО
-//7. Сделать везде адекватную инкапсуляцию
+//7. Сделать везде адекватную инкапсуляцию - ВЫПОЛНЕНО
 //8. Сделать необязательную подписку на события для компонентов, которым это не нужно
 //9. Объединить послания мессенджера о следующем ходе в одно послание
