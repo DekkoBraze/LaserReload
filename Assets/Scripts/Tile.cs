@@ -4,150 +4,83 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private Player _player;
     private SpriteRenderer _spriteRenderer;
-    private Manager _manager;
+
+    public IState state;
+    public IAngle angle;
+    public bool isDanger { get; set; }
+
     // сюда складываются Danger тайлы этой турели
-    private Tile[] _dangerTiles;
-    private Tile[] _oldDangerTiles;
+    public Tile[] _dangerTiles;
+    public Tile[] _oldDangerTiles;
     public Vector2[] _teleportTiles;
     
     // колличество спавнящихся Danger тайлов
-    private int _dangerTilesNumber = 0;
+    private int _trueDangerTilesNumber;
+    public int _dangerTilesNumber 
+    {
+        get { return _trueDangerTilesNumber; } 
+        set 
+        {
+            _trueDangerTilesNumber = value;
+            if (value != 0)
+            {
+                _dangerTiles = new Tile[value];
+                _oldDangerTiles = new Tile[value];
+            }
+        } 
+    }
 
-    // константы углов для спавна Danger
-    private readonly Vector3 angle0 = new Vector3(0, 0, 0);
-    private readonly Vector3 angle90 = new Vector3(0, 0, 90);
-    private readonly Vector3 angle180 = new Vector3(0, 0, 180);
-    private readonly Vector3 angle270 = new Vector3(0, 0, 270);
-
-    // перечисление типов тайла (по-умолчанию Empty)
+    // перечисление типов тайла (по-умолчанию Empty) - сделано для того, чтобы состояние можно было выбирать в инспекторе
     public enum TileType
     {
         EmptyTile = 0,
-        Danger = 1,
-        Portal = 2,
-        DangerPortal = 3,
-        Turret = 4,
-        MovableTurret = 5,
-        Rail = 6
+        Portal = 1,
+        Turret = 2,
+        MovableTurret = 3,
+        Rail = 4
     }
-    public TileType type = TileType.EmptyTile;
+    public TileType type;
 
     private void Awake()
     {
-        Messenger.AddListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
-        Messenger.AddListener(GameEvent.NEXT_STEP, NextStep);
+        Messenger.AddListener(GameEvent.NEXT_STEP, NextMoveAwake);
+        Messenger.AddListener(GameEvent.SET_STATE, SetState);
+        Messenger.AddListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove);
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
-        _player = FindObjectOfType<Player>();
-        _manager = FindObjectOfType<Manager>();
-        
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (type == TileType.Turret || type == TileType.MovableTurret)
+        if (transform.eulerAngles == new Vector3(0, 0, 0))
         {
-            _dangerTilesNumber = 2;
+            angle = Manager.angle0;
         }
-
-        _dangerTiles = new Tile[_dangerTilesNumber];
-        if (type == TileType.MovableTurret)
+        else if (transform.eulerAngles == new Vector3(0, 0, 90))
         {
-            _oldDangerTiles = new Tile[_dangerTilesNumber];
+            angle = Manager.angle90;
         }
-
-        _spriteRenderer.sprite = _manager.tileSprites[(int)type];
-
-        DangerTilesSpawn();
+        else if (transform.eulerAngles == new Vector3(0, 0, 180))
+        {
+            angle = Manager.angle180;
+        }
+        else
+        {
+            angle = Manager.angle270;
+        }
+        state.DangerTilesNumberUpdate(this);
+        state.DangerTilesSpawn(this);
     }
 
     public void OnMouseDown()
     {
-        if (_player != null)
+        if (Manager.playerLink != null)
         {
-            if (type == TileType.Turret || type == TileType.MovableTurret)
-            {
-                EnemyClick();
-            }
-            else if (type == TileType.EmptyTile || type == TileType.Danger || type == TileType.Portal || type == TileType.DangerPortal)
-            {
-                
-                _player.NonEnemyClick(this);
-            }
+            state.Click(this);
         }
     }
 
-    private void EnemyClick()
-    {
-        if (_player.EnemyHitCheck(this.gameObject.transform.position))
-        {
-            // смена хода для двигающихся тайлов
-            Manager.stepCount++;
-            Messenger.Broadcast(GameEvent.NEXT_STEP);
-            // уничтожение Danger тайлов врага
-            for (int i = 0; i < _dangerTilesNumber; i++)
-            {
-                DestroyDangerTile(this, _dangerTiles[i], i);
-            }
-            _dangerTilesNumber = 0;
-            // изменение типа врага на Empty
-            type = TileType.EmptyTile;
-            _spriteRenderer.sprite = _manager.tileSprites[(int)TileType.EmptyTile];
-            Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
-        }
-    }
-
-    private void DangerTilesSpawn()
-    {
-        if (type == TileType.Turret || type == TileType.MovableTurret)
-        {
-            // _isEnemyHere нужно для того, чтобы враги перекрывали Danger "лучи"
-            bool _isEnemyHere = false;
-            for (int tileNum = 1; tileNum <= _dangerTilesNumber; tileNum++)
-            {
-                if (transform.rotation.eulerAngles == angle0)
-                {
-                    Vector2 pos = new Vector2(transform.position.x - tileNum, transform.position.y);
-                    DangerTilesCheck(pos, tileNum, out _isEnemyHere);
-                    if (_isEnemyHere)
-                    {
-                        break;
-                    }
-                }
-                else if (transform.rotation.eulerAngles == angle90)
-                {
-                    Vector2 pos = new Vector2(transform.position.x, transform.position.y - tileNum);
-                    DangerTilesCheck(pos, tileNum, out _isEnemyHere);
-                    if (_isEnemyHere)
-                    {
-                        break;
-                    }
-                }
-                else if (transform.rotation.eulerAngles == angle180)
-                {
-                    Vector2 pos = new Vector2(transform.position.x + tileNum, transform.position.y);
-                    DangerTilesCheck(pos, tileNum, out _isEnemyHere);
-                    if (_isEnemyHere)
-                    {
-                        break;
-                    }
-                }
-                else
-                {
-                    Vector2 pos = new Vector2(transform.position.x, transform.position.y + tileNum);
-                    DangerTilesCheck(pos, tileNum, out _isEnemyHere);
-                    if (_isEnemyHere)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    private void DangerTilesCheck(Vector2 pos, int i, out bool isEnemyHere)
+    public void DangerTilePlace(Vector2 pos, int i, out bool isEnemyHere)
     {
         bool canPlaceTile = false;
         isEnemyHere = false;
@@ -155,7 +88,7 @@ public class Tile : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.CircleCastAll(pos, 0.1f, new Vector2(0, 0));
         foreach (RaycastHit2D obj in hits)
         {
-            if (obj.collider.gameObject.GetComponent<Tile>().type == TileType.Turret)
+            if (obj.collider.gameObject.GetComponent<Tile>().state == Manager.turretState)
             {
                 canPlaceTile = false;
                 isEnemyHere = true;
@@ -170,98 +103,51 @@ public class Tile : MonoBehaviour
         }
         if (canPlaceTile)
         {
-            if (hits[0].collider.gameObject.GetComponent<Tile>().type == TileType.EmptyTile)
-            {
-                hits[0].collider.gameObject.GetComponent<Tile>().type = TileType.Danger;
-                hits[0].collider.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.Danger];
-            }
-            else if (hits[0].collider.gameObject.GetComponent<Tile>().type == TileType.Portal)
-            {
-                hits[0].collider.gameObject.GetComponent<Tile>().type = TileType.DangerPortal;
-                hits[0].collider.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.DangerPortal];
-            }
-            _dangerTiles[i - 1] = hits[0].collider.gameObject.GetComponent<Tile>();
+            Tile hitTile = hits[0].collider.gameObject.GetComponent<Tile>();
+            hitTile.state.ChangeOnDanger(hitTile);
+            _dangerTiles[i - 1] = hitTile;
             // проверка того, стоит ли игрок на изменяемом тайле и gameOver в случае true
-            Vector2 player_pos = _player.transform.position;
+            Vector2 player_pos = Manager.playerLink.transform.position;
             if (pos == player_pos)
             {
-                _manager.OnPlayerDestroy();
-                Destroy(_player.gameObject);
+                Manager.link.OnPlayerDestroy();
+                Destroy(Manager.playerLink.gameObject);
             }
         }
     }
 
-    private void NextStep()
+    public void SetSprite(int spriteNum)
     {
-        if (type == TileType.MovableTurret && _teleportTiles.Length > 0)
-        {
-            if (_teleportTiles[Manager.stepCount % _teleportTiles.Length] != null)
-            {
-                transform.position = _teleportTiles[Manager.stepCount % _teleportTiles.Length];
-                for (int num = 0; num < _dangerTiles.Length; num++)
-                {
-                    DestroyDangerTile(this, _dangerTiles[num], num);
-                    
-                }
-                Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
-            }
-            else
-            {
-                transform.position = _teleportTiles[0];
-                for (int num = 0; num < _dangerTiles.Length; num++)
-                {
-                    DestroyDangerTile(this, _dangerTiles[num], num);
-                }
-                Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
-            }
-        }
+        _spriteRenderer.sprite = Manager.link.tileSprites[spriteNum];
+    }
+
+    public void SetDangerSprite(int spriteNum)
+    {
+        _spriteRenderer.sprite = Manager.link.dangerTileSprites[spriteNum];
+    }
+
+    private void SetState()
+    {
+        state = Manager.link.states[(int)type];
+        SetSprite(state.GetSpriteNum());
+        isDanger = false;
+    }
+
+    private void NextMoveAwake()
+    {
+        state.NextMove(this);
+        state.DangerTilesSpawn(this);
+    }
+
+    public void AwakeCheckMovableTurretMove()
+    {
+        state.CheckMovableTurretMove(this);
     }
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawn);
-        Messenger.RemoveListener(GameEvent.NEXT_STEP, NextStep);
-    }
-
-    private void DestroyDangerTile(Tile turret, Tile tile, int num)
-    {
-        if (tile != null)
-        {
-            // добавление уничтожаемого тайла в массив старых тайлов
-            if (turret.type == TileType.MovableTurret)
-            {
-                turret._oldDangerTiles[num] = tile;
-            }
-            if (tile.gameObject.GetComponent<Tile>().type == TileType.Danger)
-            {
-                tile.gameObject.GetComponent<Tile>().type = TileType.EmptyTile;
-                tile.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.EmptyTile];
-            }
-            else if (tile.gameObject.GetComponent<Tile>().type == TileType.DangerPortal)
-            {
-                tile.gameObject.GetComponent<Tile>().type = TileType.Portal;
-                tile.gameObject.GetComponent<SpriteRenderer>().sprite = _manager.tileSprites[(int)TileType.Portal];
-            }
-            tile = null;
-        }
-    }
-
-    public void CheckMovableTurretMove(Tile ClickedTile)
-    {
-        if (type == TileType.MovableTurret)
-        {
-            foreach (Tile oldPlayersPosition in _dangerTiles)
-            {
-                foreach (Tile newPlayersPosition in _oldDangerTiles)
-                {
-                    if (oldPlayersPosition == _player.playersTile && newPlayersPosition == ClickedTile)
-                    {
-                        Debug.Log("You were slashed by laser!");
-                        Destroy(_player.gameObject);
-                        _manager.OnPlayerDestroy();
-                    }
-                }
-            }
-        }
+        Messenger.RemoveListener(GameEvent.NEXT_STEP, NextMoveAwake);
+        Messenger.RemoveListener(GameEvent.SET_STATE, SetState);
+        Messenger.RemoveListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove); 
     }
 }
