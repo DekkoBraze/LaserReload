@@ -84,11 +84,11 @@ public class Manager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        stepCount = 0;
         gameOverText.enabled = true;
 
         yield return new WaitForSeconds(1);
 
+        stepCount = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

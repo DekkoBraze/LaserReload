@@ -44,7 +44,6 @@ public class Tile : MonoBehaviour
 
     private void Awake()
     {
-        Messenger.AddListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawnAwake);
         Messenger.AddListener(GameEvent.NEXT_STEP, NextMoveAwake);
         Messenger.AddListener(GameEvent.SET_STATE, SetState);
         Messenger.AddListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove);
@@ -134,14 +133,10 @@ public class Tile : MonoBehaviour
         isDanger = false;
     }
 
-    private void DangerTilesSpawnAwake()
-    {
-        state.DangerTilesSpawn(this);
-    }
-
     private void NextMoveAwake()
     {
         state.NextMove(this);
+        state.DangerTilesSpawn(this);
     }
 
     public void AwakeCheckMovableTurretMove()
@@ -151,20 +146,8 @@ public class Tile : MonoBehaviour
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener(GameEvent.DANGER_TILES_UPDATE, DangerTilesSpawnAwake);
         Messenger.RemoveListener(GameEvent.NEXT_STEP, NextMoveAwake);
         Messenger.RemoveListener(GameEvent.SET_STATE, SetState);
         Messenger.RemoveListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove); 
     }
 }
-
-//Рефакторинг:
-//1. Разбить члены enum на отдельные классы с помощью паттерна State - ВЫПОЛНЕНО
-//2. Переместить NonEnemyClick в соответствующие классы - ВЫПОЛНЕНО
-//3. Попытаться отвязать как можно больше объектов друг от друга - ВЫПОЛНЕНО
-//4. Решить проблему того, что с каждым новым пополнением списка тайлов приходится менять список спрайтов - НЕВЫПОЛНЯЕМО
-//5. Подумать над тем, чтобы сделать отдельные состояния и для углов поворота - ВЫПОЛНЕНО
-//6. Подумать над тем, чтобы сделать отдельные состояния опасный/неопасный для всех видов тайлов - ВЫПОЛНЕНО
-//7. Сделать везде адекватную инкапсуляцию - ВЫПОЛНЕНО
-//8. Сделать необязательную подписку на события для компонентов, которым это не нужно
-//9. Объединить послания мессенджера о следующем ходе в одно послание

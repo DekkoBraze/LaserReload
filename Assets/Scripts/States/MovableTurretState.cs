@@ -13,7 +13,6 @@ public class MovableTurretState : IState
             Tile[] dangers = tile._dangerTiles;
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
-            Messenger.Broadcast(GameEvent.NEXT_STEP);
             // уничтожение Danger тайлов врага
             for (int i = 0; i < dangersNum; i++)
             {
@@ -28,7 +27,7 @@ public class MovableTurretState : IState
             // изменение типа врага на Empty
             tile.state = Manager.emptyState;
             tile.SetSprite(0);
-            Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
+            Messenger.Broadcast(GameEvent.NEXT_STEP);
         }
     }
     public void SpriteUpdate(Tile tile)
@@ -79,7 +78,6 @@ public class MovableTurretState : IState
                     dangers[num] = null;
                 }
             }
-            Messenger.Broadcast(GameEvent.DANGER_TILES_UPDATE);
         }
     }
     public void ChangeOnDanger(Tile tile) { }
