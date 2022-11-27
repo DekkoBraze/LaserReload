@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyState : IState
+public class EmptyState : MonoBehaviour, IState
 {
     private int spriteNum = 0;
+    private bool isDanger = false;
 
     public void Click(Tile tile)
     {
@@ -16,7 +17,7 @@ public class EmptyState : IState
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
-            if (tile.isDanger)
+            if (isDanger)
             {
                 Manager.link.OnPlayerDestroy();
                 Manager.playerLink.PlayerDestroy();
@@ -41,14 +42,15 @@ public class EmptyState : IState
     }
     public void ChangeOnDanger(Tile tile)
     {
-        tile.isDanger = true;
+        isDanger = true;
         tile.SetDangerSprite(spriteNum);
     }
     public void ChangeOnSafe(Tile tile)
     {
-        tile.isDanger = false;
+        isDanger = false;
         tile.SetSprite(spriteNum);
     }
+
     public void DangerTilesSpawn(Tile tile) { }
     public void NextMove(Tile tile) { }
     public void CheckMovableTurretMove(Tile tile) { }

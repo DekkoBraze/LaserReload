@@ -7,8 +7,7 @@ public class Tile : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     public IState state;
-    public IAngle angle;
-    public bool isDanger { get; set; }
+    public IAngle angle;    
 
     // сюда складываютс€ Danger тайлы этой турели
     public Tile[] _dangerTiles;
@@ -30,17 +29,6 @@ public class Tile : MonoBehaviour
             }
         } 
     }
-
-    // перечисление типов тайла (по-умолчанию Empty) - сделано дл€ того, чтобы состо€ние можно было выбирать в инспекторе
-    public enum TileType
-    {
-        EmptyTile = 0,
-        Portal = 1,
-        Turret = 2,
-        MovableTurret = 3,
-        Rail = 4
-    }
-    public TileType type;
 
     private void Awake()
     {
@@ -88,7 +76,7 @@ public class Tile : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.CircleCastAll(pos, 0.1f, new Vector2(0, 0));
         foreach (RaycastHit2D obj in hits)
         {
-            if (obj.collider.gameObject.GetComponent<Tile>().state == Manager.turretState)
+            if (obj.collider.gameObject.GetComponent<Tile>().state.GetType().ToString() == "TurretState")
             {
                 canPlaceTile = false;
                 isEnemyHere = true;
@@ -126,11 +114,10 @@ public class Tile : MonoBehaviour
         _spriteRenderer.sprite = Manager.link.dangerTileSprites[spriteNum];
     }
 
-    private void SetState()
+    public void SetState()
     {
-        state = Manager.link.states[(int)type];
+        state = GetComponent<IState>();
         SetSprite(state.GetSpriteNum());
-        isDanger = false;
     }
 
     private void NextMoveAwake()
@@ -151,3 +138,8 @@ public class Tile : MonoBehaviour
         Messenger.RemoveListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove); 
     }
 }
+// 1. ѕровер€ть нахождение стейта в инспекторе вместо того, чтобы смотреть енум - ¬џѕќЋЌ≈Ќќ
+// 2. —делать методы, которые позвол€ют проверить, существует ли булева€ переменна€ isDanger в стейте или нет и перенести еЄ из тайла в стейты - ¬џѕќЋЌ≈Ќќ
+// 3. –азделить все стейты на стрел€ющие и нестрел€ющие с помощью двух абстрактных классов AMayKill и ACantKill, которые предопредел€ют общие дл€ стейтов действи€
+// 4. ѕеренести все пол€, относ€щиес€ к стрел€ющим тайлам, из тайла в соответствующие стейты
+// 5. ѕеренести спрайты из менеджера в соответствующие префабы объектов (в стейты)

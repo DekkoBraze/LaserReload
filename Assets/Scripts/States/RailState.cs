@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RailState : IState
+public class RailState : MonoBehaviour, IState
 {
     private int spriteNum = 4;
     public void Click(Tile tile) { }
@@ -24,4 +24,3 @@ public class RailState : IState
         return spriteNum;
     }
 }
-

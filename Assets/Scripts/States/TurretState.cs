@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretState : IState
+public class TurretState : MonoBehaviour, IState
 {
     private int spriteNum = 2;
+    public bool isInfinite;
+
     public void Click(Tile tile)
     {
         if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
@@ -25,7 +27,9 @@ public class TurretState : IState
             }
             tile._dangerTilesNumber = 0;
             // изменение типа врага на Empty
-            tile.state = Manager.emptyState;
+            tile.gameObject.AddComponent<EmptyState>();
+            Destroy(tile.gameObject.GetComponent<TurretState>());
+            tile.state = GetComponent<EmptyState>();
             tile.SetSprite(0);
             Messenger.Broadcast(GameEvent.NEXT_STEP);
         }

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalState : IState
+public class PortalState : MonoBehaviour, IState
 {
     private int spriteNum = 1;
+    private bool isDanger = false;
+
     public void Click(Tile tile)
     {
         Vector2 tilePos = tile.transform.position;
@@ -15,6 +17,11 @@ public class PortalState : IState
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
+            if (isDanger)
+            {
+                Manager.link.OnPlayerDestroy();
+                Manager.playerLink.PlayerDestroy();
+            }
             Manager.link.CompleteTextAppear();
             Manager.link.isItOver = true;
             if (Manager.playerLink.energy < 4)
@@ -37,12 +44,12 @@ public class PortalState : IState
     }
     public void ChangeOnDanger(Tile tile)
     {
-        tile.isDanger = true;
+        isDanger = true;
         tile.SetDangerSprite(spriteNum);
     }
     public void ChangeOnSafe(Tile tile)
     {
-        tile.isDanger = false;
+        isDanger = false;
         tile.SetSprite(spriteNum);
     }
     public void DangerTilesSpawn(Tile tile) { }
