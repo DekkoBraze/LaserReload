@@ -125,11 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f302414e96c0f4ea62d731f461fdf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInfinite: 0
-  _dangerTiles: []
-  _oldDangerTiles: []
-  _teleportTiles: []
-  type: 1
 --- !u!114 &-3199104139239977153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1cc01d4b48aa34eb79c5e583558b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dangerTilesNumber: 0
+  tileSprite: {fileID: 21300000, guid: 4a08af7dd2867f742ad2286e9a681576, type: 3}
+  dangerTileSprite: {fileID: 21300000, guid: 7a6f22fe32820e24c924906ae84c5c53, type: 3}
