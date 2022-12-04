@@ -2,113 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-public class TurretState : IState
+public class TurretState : AMayKill, IState
 {
-    private int spriteNum = 2;
-=======
-public class TurretState : MonoBehaviour, IState
-{
-    private int spriteNum = 2;
+    public Sprite tileSprite;
+
     public bool isInfinite;
 
->>>>>>> parent of 9828e7c (New states habe been completed.)
-=======
-public class TurretState : MonoBehaviour, IState
-{
-    private int spriteNum = 2;
-    public bool isInfinite;
-
->>>>>>> parent of 9828e7c (New states habe been completed.)
-    public void Click(Tile tile)
-    {
-        if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
-        {
-            int dangersNum = tile._dangerTilesNumber;
-            Tile[] dangers = tile._dangerTiles;
-            // смена хода для двигающихся тайлов
-            Manager.stepCount++;
-            // уничтожение Danger тайлов врага
-            for (int i = 0; i < dangersNum; i++)
-            {
-                if (dangers[i] != null)
-                {
-                    Tile dangerTile = dangers[i].gameObject.GetComponent<Tile>();
-                    dangerTile.state.ChangeOnSafe(dangerTile);
-                    dangers[i] = null;
-                }
-            }
-            tile._dangerTilesNumber = 0;
-            // изменение типа врага на Empty
-<<<<<<< HEAD
-<<<<<<< HEAD
-            tile.state = Manager.emptyState;
-=======
-            tile.gameObject.AddComponent<EmptyState>();
-            Destroy(tile.gameObject.GetComponent<TurretState>());
-            tile.state = GetComponent<EmptyState>();
->>>>>>> parent of 9828e7c (New states habe been completed.)
-=======
-            tile.gameObject.AddComponent<EmptyState>();
-            Destroy(tile.gameObject.GetComponent<TurretState>());
-            tile.state = GetComponent<EmptyState>();
->>>>>>> parent of 9828e7c (New states habe been completed.)
-            tile.SetSprite(0);
-            Messenger.Broadcast(GameEvent.NEXT_STEP);
-        }
-    }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(spriteNum);
+        tile.SetSprite(tileSprite);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of 9828e7c (New states habe been completed.)
-=======
->>>>>>> parent of 9828e7c (New states habe been completed.)
-        tile._dangerTilesNumber = 2;
-    }
-    public void DangerTilesSpawn(Tile tile) 
-    {
-        int dangersNum = tile._dangerTilesNumber;
-        // _isEnemyHere нужно для того, чтобы враги перекрывали Danger "лучи"
-        bool _isEnemyHere = false;
-        for (int tileNum = 1; tileNum <= dangersNum; tileNum++)
+        if (!isInfinite)
         {
-            Vector2 pos = tile.angle.TilePos(tile.gameObject.transform.position, tileNum);
-            tile.DangerTilePlace(pos, tileNum, out _isEnemyHere);
-            if (_isEnemyHere)
-            {
-                break;
-            }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        if (isInfinite)
-        {
-            dangerTilesNumber = 50;
+            dangerTilesNumber = 2;
         }
         else
         {
-            dangerTilesNumber = 2;
->>>>>>> Stashed changes
-=======
->>>>>>> parent of 9828e7c (New states habe been completed.)
-=======
->>>>>>> parent of 9828e7c (New states habe been completed.)
+            dangerTilesNumber = 50;
         }
     }
-    public void ChangeOnDanger(Tile tile) { }
-    public void ChangeOnSafe(Tile tile) { }
     public void NextMove(Tile tile) { }
     public void CheckMovableTurretMove(Tile tile) { }
-    public int GetSpriteNum()
+    public Sprite GetSprite()
     {
-        return spriteNum;
+        return tileSprite;
     }
 }
