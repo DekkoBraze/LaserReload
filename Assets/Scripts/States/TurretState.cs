@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class TurretState : IState
 {
     private int spriteNum = 2;
+=======
+public class TurretState : MonoBehaviour, IState
+{
+    private int spriteNum = 2;
+    public bool isInfinite;
+
+>>>>>>> parent of 9828e7c (New states habe been completed.)
 =======
 public class TurretState : MonoBehaviour, IState
 {
@@ -34,7 +42,13 @@ public class TurretState : MonoBehaviour, IState
             tile._dangerTilesNumber = 0;
             // изменение типа врага на Empty
 <<<<<<< HEAD
+<<<<<<< HEAD
             tile.state = Manager.emptyState;
+=======
+            tile.gameObject.AddComponent<EmptyState>();
+            Destroy(tile.gameObject.GetComponent<TurretState>());
+            tile.state = GetComponent<EmptyState>();
+>>>>>>> parent of 9828e7c (New states habe been completed.)
 =======
             tile.gameObject.AddComponent<EmptyState>();
             Destroy(tile.gameObject.GetComponent<TurretState>());
@@ -51,7 +65,10 @@ public class TurretState : MonoBehaviour, IState
     public void DangerTilesNumberUpdate(Tile tile)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> parent of 9828e7c (New states habe been completed.)
 =======
 >>>>>>> parent of 9828e7c (New states habe been completed.)
         tile._dangerTilesNumber = 2;
@@ -70,6 +87,7 @@ public class TurretState : MonoBehaviour, IState
                 break;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         if (isInfinite)
         {
@@ -79,6 +97,8 @@ public class TurretState : MonoBehaviour, IState
         {
             dangerTilesNumber = 2;
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 9828e7c (New states habe been completed.)
 =======
 >>>>>>> parent of 9828e7c (New states habe been completed.)
         }

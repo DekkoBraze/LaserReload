@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class PortalState : IState
 {
     private int spriteNum = 1;
+=======
+public class PortalState : MonoBehaviour, IState
+{
+    private int spriteNum = 1;
+    private bool isDanger = false;
+
+>>>>>>> parent of 9828e7c (New states habe been completed.)
 =======
 public class PortalState : MonoBehaviour, IState
 {
@@ -20,6 +28,7 @@ public class PortalState : MonoBehaviour, IState
         {
             Manager.link.clickedTile = tile;
             Manager.playerLink.PlayerChangePosition(tilePos);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< Updated upstream
             // смена хода для двигающихся тайлов
@@ -45,6 +54,16 @@ public class PortalState : MonoBehaviour, IState
                 Manager.link.OnPlayerDestroy();
                 Manager.playerLink.PlayerDestroy();
             }
+=======
+            // смена хода для двигающихся тайлов
+            Manager.stepCount++;
+            Messenger.Broadcast(GameEvent.NEXT_STEP);
+            if (isDanger)
+            {
+                Manager.link.OnPlayerDestroy();
+                Manager.playerLink.PlayerDestroy();
+            }
+>>>>>>> parent of 9828e7c (New states habe been completed.)
             Manager.link.CompleteTextAppear();
             Manager.link.isItOver = true;
             if (Manager.playerLink.energy < 4)
@@ -52,6 +71,9 @@ public class PortalState : MonoBehaviour, IState
                 Manager.playerLink.energy++;
                 Manager.link.EnergyUpdate();
             }
+<<<<<<< HEAD
+>>>>>>> parent of 9828e7c (New states habe been completed.)
+=======
 >>>>>>> parent of 9828e7c (New states habe been completed.)
             Messenger.Broadcast(GameEvent.CHECK_MOVABLE_TURRET);
             // уничтожение предыдущего тайла под игроком и установка нового
@@ -72,6 +94,9 @@ public class PortalState : MonoBehaviour, IState
         tile.isDanger = true;
 =======
         isDanger = true;
+<<<<<<< HEAD
+>>>>>>> parent of 9828e7c (New states habe been completed.)
+=======
 >>>>>>> parent of 9828e7c (New states habe been completed.)
         tile.SetDangerSprite(spriteNum);
     }
@@ -81,6 +106,9 @@ public class PortalState : MonoBehaviour, IState
         tile.isDanger = false;
 =======
         isDanger = false;
+<<<<<<< HEAD
+>>>>>>> parent of 9828e7c (New states habe been completed.)
+=======
 >>>>>>> parent of 9828e7c (New states habe been completed.)
         tile.SetSprite(spriteNum);
     }
