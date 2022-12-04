@@ -10,12 +10,6 @@ public class Manager : MonoBehaviour
     [SerializeField] private TMP_Text completeText;
     [SerializeField] private TMP_Text gameOverText;
 
-    public static EmptyState emptyState;
-    public static PortalState portalState;
-    public static TurretState turretState;
-    public static MovableTurretState movableTurretState;
-    public static RailState railState;
-
     public static Angle0 angle0;
     public static Angle90 angle90;
     public static Angle180 angle180;
@@ -24,11 +18,8 @@ public class Manager : MonoBehaviour
     public static Manager link;
     public static Player playerLink;
 
-    // здесь хранятся спрайты для всех тайлов
-    public Sprite[] tileSprites;
-    public Sprite[] dangerTileSprites;
-
-    public IState[] states;
+    public Sprite emtyTileSprite;
+    public Sprite dangerEmptyTileSprite;
 
     public Tile clickedTile { get; set; }
     public static int stepCount { get; set; } = 0;
@@ -37,18 +28,6 @@ public class Manager : MonoBehaviour
     private void Awake()
     {
         link = this;
-
-        states = new IState[5];
-        emptyState = new EmptyState();
-        states[0] = emptyState;
-        portalState = new PortalState();
-        states[1] = portalState;
-        turretState = new TurretState();
-        states[2] = turretState;
-        movableTurretState = new MovableTurretState();
-        states[3] = movableTurretState;
-        railState = new RailState();
-        states[4] = railState;
 
         angle0 = new Angle0();
         angle90 = new Angle90();
