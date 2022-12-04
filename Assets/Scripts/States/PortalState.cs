@@ -2,54 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalState : IState
+public class PortalState : ACantKill, IState
 {
-    private int spriteNum = 1;
-    public void Click(Tile tile)
+    public Sprite tileSprite;
+    public Sprite dangerTileSprite;
+
+    public override void Click(Tile tile)
     {
         Vector2 tilePos = tile.transform.position;
         if (Manager.playerLink.MoveCheck(tilePos))
         {
             Manager.link.clickedTile = tile;
             Manager.playerLink.PlayerChangePosition(tilePos);
-            // смена хода для двигающихся тайлов
-            Manager.stepCount++;
-            Messenger.Broadcast(GameEvent.NEXT_STEP);
-            Manager.link.CompleteTextAppear();
-            Manager.link.isItOver = true;
-            if (Manager.playerLink.energy < 4)
+            base.Click(tile);
+            if (!isDanger)
             {
-                Manager.playerLink.energy++;
-                Manager.link.EnergyUpdate();
+                Manager.link.CompleteTextAppear();
+                Manager.link.isItOver = true;
             }
-            Messenger.Broadcast(GameEvent.CHECK_MOVABLE_TURRET);
-            // уничтожение предыдущего тайла под игроком и установка нового
-            Manager.playerLink.PlayerTileChange(tile);
         }
     }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(spriteNum);
+        tile.SetSprite(tileSprite);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
-        tile._dangerTilesNumber = 0;
+        dangerTilesNumber = 0;
     }
     public void ChangeOnDanger(Tile tile)
     {
-        tile.isDanger = true;
-        tile.SetDangerSprite(spriteNum);
+        isDanger = true;
+        tile.SetDangerSprite(dangerTileSprite);
     }
     public void ChangeOnSafe(Tile tile)
     {
-        tile.isDanger = false;
-        tile.SetSprite(spriteNum);
+        isDanger = false;
+        tile.SetSprite(tileSprite);
     }
-    public void DangerTilesSpawn(Tile tile) { }
-    public void NextMove(Tile tile) { }
-    public void CheckMovableTurretMove(Tile tile) { }
-    public int GetSpriteNum()
+    public Sprite GetSprite()
     {
-        return spriteNum;
+        return tileSprite;
     }
 }
