@@ -36,6 +36,7 @@ public class MovableTurretState : IState
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
+<<<<<<< Updated upstream
         tile._dangerTilesNumber = 2;
     }
     public void DangerTilesSpawn(Tile tile)
@@ -51,6 +52,15 @@ public class MovableTurretState : IState
             {
                 break;
             }
+=======
+        if (isInfinite)
+        {
+            dangerTilesNumber = 50;
+        }
+        else
+        {
+            dangerTilesNumber = 2;
+>>>>>>> Stashed changes
         }
     }
     public void NextMove(Tile tile) 
@@ -93,7 +103,8 @@ public class MovableTurretState : IState
                     Debug.Log("You were slashed by laser!");
                     Manager.playerLink.PlayerDestroy();
                     Manager.link.OnPlayerDestroy();
-                    break;
+                    Manager.link.isItOver = true;
+                    return;
                 }
             }
         }

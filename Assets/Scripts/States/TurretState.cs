@@ -36,6 +36,7 @@ public class TurretState : IState
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
+<<<<<<< Updated upstream
         tile._dangerTilesNumber = 2;
     }
     public void DangerTilesSpawn(Tile tile) 
@@ -51,6 +52,15 @@ public class TurretState : IState
             {
                 break;
             }
+=======
+        if (isInfinite)
+        {
+            dangerTilesNumber = 50;
+        }
+        else
+        {
+            dangerTilesNumber = 2;
+>>>>>>> Stashed changes
         }
     }
     public void ChangeOnDanger(Tile tile) { }

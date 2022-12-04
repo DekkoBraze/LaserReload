@@ -12,12 +12,17 @@ public class PortalState : IState
         {
             Manager.link.clickedTile = tile;
             Manager.playerLink.PlayerChangePosition(tilePos);
+<<<<<<< Updated upstream
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
             Manager.link.CompleteTextAppear();
             Manager.link.isItOver = true;
             if (Manager.playerLink.energy < 4)
+=======
+            base.Click(tile);
+            if (!isDanger && !Manager.link.isItOver)
+>>>>>>> Stashed changes
             {
                 Manager.playerLink.energy++;
                 Manager.link.EnergyUpdate();

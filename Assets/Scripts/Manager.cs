@@ -76,12 +76,6 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public void StepChange()
-    {
-        stepCount++;
-        Messenger.Broadcast(GameEvent.NEXT_STEP);
-    }
-
     public IEnumerator GameOver()
     {
         gameOverText.enabled = true;
