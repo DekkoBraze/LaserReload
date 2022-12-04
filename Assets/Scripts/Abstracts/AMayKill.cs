@@ -50,6 +50,7 @@ public abstract class AMayKill : MonoBehaviour
             tile.state = GetComponent<EmptyState>();
             tile.state.SpriteUpdate(tile);
             Messenger.Broadcast(GameEvent.NEXT_STEP);
+            Messenger.Broadcast(GameEvent.DANGER_SPAWN);
         }
     }
 

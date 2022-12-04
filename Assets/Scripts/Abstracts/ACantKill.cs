@@ -13,7 +13,8 @@ public abstract class ACantKill : MonoBehaviour
     {
             // смена хода для двигающихся тайлов
             Manager.stepCount++;
-            Messenger.Broadcast(GameEvent.NEXT_STEP);
+        Messenger.Broadcast(GameEvent.NEXT_STEP);
+        Messenger.Broadcast(GameEvent.DANGER_SPAWN);
             if (isDanger)
             {
                 Manager.link.OnPlayerDestroy();

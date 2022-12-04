@@ -12,6 +12,7 @@ public class Tile : MonoBehaviour
     private void Awake()
     {
         Messenger.AddListener(GameEvent.NEXT_STEP, NextMoveAwake);
+        Messenger.AddListener(GameEvent.DANGER_SPAWN, DangerSpawnAwake);
         Messenger.AddListener(GameEvent.SET_STATE, SetState);
         Messenger.AddListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove);
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -66,6 +67,10 @@ public class Tile : MonoBehaviour
     private void NextMoveAwake()
     {
         state.NextMove(this);
+    }
+
+    private void DangerSpawnAwake()
+    {
         state.DangerTilesSpawn(this);
     }
 
@@ -77,6 +82,7 @@ public class Tile : MonoBehaviour
     private void OnDestroy()
     {
         Messenger.RemoveListener(GameEvent.NEXT_STEP, NextMoveAwake);
+        Messenger.RemoveListener(GameEvent.DANGER_SPAWN, DangerSpawnAwake);
         Messenger.RemoveListener(GameEvent.SET_STATE, SetState);
         Messenger.RemoveListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove); 
     }

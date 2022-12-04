@@ -14,7 +14,14 @@ public class TurretState : AMayKill, IState
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
-        dangerTilesNumber = 2;
+        if (!isInfinite)
+        {
+            dangerTilesNumber = 2;
+        }
+        else
+        {
+            dangerTilesNumber = 50;
+        }
     }
     public void NextMove(Tile tile) { }
     public void CheckMovableTurretMove(Tile tile) { }

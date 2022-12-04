@@ -15,7 +15,7 @@ public class PortalState : ACantKill, IState
             Manager.link.clickedTile = tile;
             Manager.playerLink.PlayerChangePosition(tilePos);
             base.Click(tile);
-            if (!isDanger)
+            if (!isDanger && !Manager.link.isItOver)
             {
                 Manager.link.CompleteTextAppear();
                 Manager.link.isItOver = true;
