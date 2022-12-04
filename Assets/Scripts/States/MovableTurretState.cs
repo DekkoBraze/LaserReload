@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
 public class MovableTurretState : IState
 {
     private int spriteNum = 3;
+=======
+public class MovableTurretState : MonoBehaviour, IState
+{
+    private int spriteNum = 3;
+    public bool isInfinite;
+
+>>>>>>> parent of 9828e7c (New states habe been completed.)
     public void Click(Tile tile)
     {
         if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
@@ -25,7 +33,13 @@ public class MovableTurretState : IState
             }
             tile._dangerTilesNumber = 0;
             // изменение типа врага на Empty
+<<<<<<< HEAD
             tile.state = Manager.emptyState;
+=======
+            tile.gameObject.AddComponent<EmptyState>();
+            Destroy(tile.gameObject.GetComponent<TurretState>());
+            tile.state = GetComponent<EmptyState>();
+>>>>>>> parent of 9828e7c (New states habe been completed.)
             tile.SetSprite(0);
             Messenger.Broadcast(GameEvent.NEXT_STEP);
         }
@@ -36,7 +50,10 @@ public class MovableTurretState : IState
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> parent of 9828e7c (New states habe been completed.)
         tile._dangerTilesNumber = 2;
     }
     public void DangerTilesSpawn(Tile tile)
@@ -52,6 +69,7 @@ public class MovableTurretState : IState
             {
                 break;
             }
+<<<<<<< HEAD
 =======
         if (isInfinite)
         {
@@ -61,6 +79,8 @@ public class MovableTurretState : IState
         {
             dangerTilesNumber = 2;
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 9828e7c (New states habe been completed.)
         }
     }
     public void NextMove(Tile tile) 

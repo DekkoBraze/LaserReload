@@ -18,8 +18,9 @@ public class Manager : MonoBehaviour
     public static Manager link;
     public static Player playerLink;
 
-    public Sprite emtyTileSprite;
-    public Sprite dangerEmptyTileSprite;
+    // здесь хранятся спрайты для всех тайлов
+    public Sprite[] tileSprites;
+    public Sprite[] dangerTileSprites;
 
     public Tile clickedTile { get; set; }
     public static int stepCount { get; set; } = 0;

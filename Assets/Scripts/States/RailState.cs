@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RailState : ACantKill, IState
+public class RailState : MonoBehaviour, IState
 {
-    public Sprite tileSprite;
-
-    public override void Click(Tile tile) { }
+    private int spriteNum = 4;
+    public void Click(Tile tile) { }
     public void SpriteUpdate(Tile tile)
     {
-        tile.SetSprite(tileSprite);
+        tile.SetSprite(spriteNum);
     }
     public void DangerTilesNumberUpdate(Tile tile)
     {
-        dangerTilesNumber = 0;
+        tile._dangerTilesNumber = 0;
     }
+    public void DangerTilesSpawn(Tile tile) { }
+    public void NextMove(Tile tile) { }
     public void ChangeOnDanger(Tile tile) { }
     public void ChangeOnSafe(Tile tile) { }
-    public Sprite GetSprite()
+    public void CheckMovableTurretMove(Tile tile) { }
+    public int GetSpriteNum()
     {
-        return tileSprite;
+        return spriteNum;
     }
 }

@@ -125,6 +125,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f302414e96c0f4ea62d731f461fdf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dangerTiles: []
+  _oldDangerTiles: []
+  _teleportTiles:
+  - {x: 3, y: 2}
+  - {x: 2, y: 2}
+  - {x: 1, y: 2}
+  - {x: 0, y: 2}
+  - {x: -1, y: 2}
+  - {x: -2, y: 2}
+  - {x: -3, y: 2}
+  - {x: -4, y: 2}
 --- !u!114 &573492037610845044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +148,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfac4665236d7f41ba8bae6e4c1fde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dangerTiles: []
-  _oldDangerTiles: []
-  tileSprite: {fileID: 21300000, guid: e0898a5d61f5fcb48a726bbf49575174, type: 3}
   isInfinite: 1
-  teleportTiles: []

@@ -12,5 +12,6 @@ public interface IState
     void ChangeOnDanger(Tile tile);
     void ChangeOnSafe(Tile tile);
     void CheckMovableTurretMove(Tile tile);
-    Sprite GetSprite();
+    int GetSpriteNum();
+
 }
