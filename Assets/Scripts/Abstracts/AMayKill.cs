@@ -25,7 +25,7 @@ public abstract class AMayKill : MonoBehaviour
         }
     }
 
-    public void Click(Tile tile)
+    public virtual void Click(Tile tile)
     {
         if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
         {

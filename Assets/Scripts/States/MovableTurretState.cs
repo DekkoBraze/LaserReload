@@ -8,6 +8,7 @@ public class MovableTurretState : AMayKill, IState
 
     public bool isInfinite;
 
+
     public Vector2[] teleportTiles;
 
     public void SpriteUpdate(Tile tile)
@@ -25,7 +26,15 @@ public class MovableTurretState : AMayKill, IState
             dangerTilesNumber = 50;
         }
     }
-    
+
+    public override void Click(Tile tile)
+    {
+        if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
+        {
+            Debug.Log("You can't destroy this!");
+        }
+    }
+
     public void NextMove(Tile tile) 
     {
         if (teleportTiles.Length > 0)
