@@ -20,6 +20,7 @@ public class Manager : MonoBehaviour
 
     public Sprite emtyTileSprite;
     public Sprite dangerEmptyTileSprite;
+    public Sprite lavaTileSprite;
 
     public Tile clickedTile { get; set; }
     public static int stepCount { get; set; } = 0;

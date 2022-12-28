@@ -42,7 +42,10 @@ public class Player : MonoBehaviour
 
     public void PlayerTileChange(Tile ClickedTile)
     {
-        Destroy(playersTile.gameObject);
+        playersTile.gameObject.AddComponent<LavaState>();
+        Destroy(playersTile.gameObject.GetComponent<EmptyState>());
+        playersTile.state = playersTile.gameObject.GetComponent<LavaState>();
+        playersTile.SetSprite(playersTile.state.GetSprite());
         playersTile = ClickedTile;
     }
 

@@ -8,7 +8,6 @@ public class MovableTurretState : AMayKill, IState
 
     public bool isInfinite;
 
-
     public Vector2[] teleportTiles;
 
     public void SpriteUpdate(Tile tile)
@@ -32,6 +31,22 @@ public class MovableTurretState : AMayKill, IState
         if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
         {
             Debug.Log("You can't destroy this!");
+            int dangersNum = dangerTilesNumber;
+            Tile[] dangers = dangerTiles;
+            // смена хода для двигающихся тайлов
+            Manager.stepCount++;
+            // уничтожение Danger тайлов врага
+            for (int i = 0; i < dangersNum; i++)
+            {
+                if (dangers[i] != null)
+                {
+                    Tile dangerTile = dangers[i].gameObject.GetComponent<Tile>();
+                    dangerTile.state.ChangeOnSafe(dangerTile);
+                    dangers[i] = null;
+                }
+            }
+            Messenger.Broadcast(GameEvent.NEXT_STEP);
+            Messenger.Broadcast(GameEvent.DANGER_SPAWN);
         }
     }
 

@@ -2349,8 +2349,8 @@ Transform:
   - {fileID: 127324664}
   - {fileID: 1302721363}
   - {fileID: 1604994174}
-  - {fileID: 346806868}
   - {fileID: 371793608}
+  - {fileID: 346806868}
   - {fileID: 1252670184}
   - {fileID: 2133776863}
   - {fileID: 112836206}
@@ -2391,20 +2391,20 @@ Transform:
   - {fileID: 1705410721}
   - {fileID: 522726743}
   - {fileID: 1826983981}
+  - {fileID: 1422706841}
   - {fileID: 815992019}
+  - {fileID: 960677815}
   - {fileID: 1784808154}
   - {fileID: 491638377}
   - {fileID: 849199355}
   - {fileID: 891154640}
   - {fileID: 1213486815}
-  - {fileID: 1420066720}
-  - {fileID: 1422706841}
-  - {fileID: 960677815}
-  - {fileID: 1346700414}
-  - {fileID: 1405786552}
-  - {fileID: 980246746}
-  - {fileID: 188938464}
   - {fileID: 1643123994}
+  - {fileID: 1420066720}
+  - {fileID: 1346700414}
+  - {fileID: 980246746}
+  - {fileID: 1405786552}
+  - {fileID: 188938464}
   - {fileID: 64023479}
   - {fileID: 426675366}
   - {fileID: 768139593}
@@ -2718,6 +2718,7 @@ MonoBehaviour:
   gameOverText: {fileID: 816093925}
   emtyTileSprite: {fileID: 21300000, guid: 6d8902681e439b544a6b16683412e695, type: 3}
   dangerEmptyTileSprite: {fileID: 21300000, guid: ac5e81c5791af4240a01b478b1e9a3e4, type: 3}
+  lavaTileSprite: {fileID: 21300000, guid: 176a7ab361c6f804bb045af972106376, type: 3}
 --- !u!1001 &865576308
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -53,11 +53,6 @@ public class Tile : MonoBehaviour
         _spriteRenderer.sprite = sprite;
     }
 
-    public void SetDangerSprite(Sprite sprite)
-    {
-        _spriteRenderer.sprite = sprite;
-    }
-
     public void SetState()
     {
         state = GetComponent<IState>();

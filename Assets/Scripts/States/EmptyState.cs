@@ -18,11 +18,6 @@ public class EmptyState : ACantKill, IState
         }
     }
 
-    public void SpriteUpdate(Tile tile)
-    {
-        spriteCheck();
-        tile.SetSprite(tileSprite);
-    }
     public void DangerTilesNumberUpdate(Tile tile)
     {
         dangerTilesNumber = 0;
@@ -31,7 +26,7 @@ public class EmptyState : ACantKill, IState
     {
         spriteCheck();
         isDanger = true;
-        tile.SetDangerSprite(dangerTileSprite);
+        tile.SetSprite(dangerTileSprite);
     }
     public void ChangeOnSafe(Tile tile)
     {
