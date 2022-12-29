@@ -10,6 +10,14 @@ public class MovableTurretState : AMayKill, IState
 
     public Vector2[] teleportTiles;
 
+    public Vector2 firstTeleportTile;
+    public Vector2 lastTeleportTile;
+
+    public void StateStart()
+    {
+        CalculateMovablePath();
+    }
+
     public void SpriteUpdate(Tile tile)
     {
         tile.SetSprite(tileSprite);
@@ -95,5 +103,52 @@ public class MovableTurretState : AMayKill, IState
     public Sprite GetSprite()
     {
         return tileSprite;
+    }
+
+    public void CalculateMovablePath()
+    {
+        int teleportTilesNum = 0;
+        if (firstTeleportTile.x == lastTeleportTile.x)
+        {
+            teleportTilesNum = (int)Mathf.Abs(firstTeleportTile.y - lastTeleportTile.y) + 1;
+            teleportTiles = new Vector2[teleportTilesNum];
+            if (firstTeleportTile.y < lastTeleportTile.y)
+            {
+                for (int i = 0; i < teleportTilesNum; i++)
+                {
+                    Vector2 currentVector = new Vector2(firstTeleportTile.x, firstTeleportTile.y + i);
+                    teleportTiles[i] = currentVector;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < teleportTilesNum; i++)
+                {
+                    Vector2 currentVector = new Vector2(firstTeleportTile.x, firstTeleportTile.y - i);
+                    teleportTiles[i] = currentVector;
+                }
+            }
+        }
+        else
+        {
+            teleportTilesNum = (int)Mathf.Abs(firstTeleportTile.x - lastTeleportTile.x) + 1;
+            teleportTiles = new Vector2[teleportTilesNum];
+            if (firstTeleportTile.x < lastTeleportTile.x)
+            {
+                for (int i = 0; i < teleportTilesNum; i++)
+                {
+                    Vector2 currentVector = new Vector2(firstTeleportTile.x + i, firstTeleportTile.y);
+                    teleportTiles[i] = currentVector;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < teleportTilesNum; i++)
+                {
+                    Vector2 currentVector = new Vector2(firstTeleportTile.x - i, firstTeleportTile.y);
+                    teleportTiles[i] = currentVector;
+                }
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IState
 {
+    void StateStart();
     void Click(Tile tile);
     void DangerTilesNumberUpdate(Tile tile);
     void DangerTilesSpawn(Tile tile);

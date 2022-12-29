@@ -2907,8 +2907,24 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3813769109221328325, guid: a3471de655a3c344abef8377ad305304, type: 3}
+      propertyPath: lastTeleportTile.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813769109221328325, guid: a3471de655a3c344abef8377ad305304, type: 3}
+      propertyPath: lastTeleportTile.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813769109221328325, guid: a3471de655a3c344abef8377ad305304, type: 3}
+      propertyPath: firstTeleportTile.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813769109221328325, guid: a3471de655a3c344abef8377ad305304, type: 3}
+      propertyPath: firstTeleportTile.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813769109221328325, guid: a3471de655a3c344abef8377ad305304, type: 3}
       propertyPath: teleportTiles.Array.size
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3813769109221328325, guid: a3471de655a3c344abef8377ad305304, type: 3}
       propertyPath: _teleportTiles.Array.size

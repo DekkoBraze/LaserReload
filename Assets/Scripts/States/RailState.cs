@@ -6,6 +6,8 @@ public class RailState : ACantKill, IState
 {
     public Sprite tileSprite;
 
+    public void StateStart() { }
+
     public override void Click(Tile tile) { }
     public void SpriteUpdate(Tile tile)
     {

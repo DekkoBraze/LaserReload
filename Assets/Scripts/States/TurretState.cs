@@ -8,6 +8,8 @@ public class TurretState : AMayKill, IState
 
     public bool isInfinite;
 
+    public void StateStart() { }
+
     public void SpriteUpdate(Tile tile)
     {
         tile.SetSprite(tileSprite);

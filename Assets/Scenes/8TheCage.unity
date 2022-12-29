@@ -263,8 +263,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c97f1ba29c624794b9d52620fef32f95, type: 3}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: lastTeleportTile.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: lastTeleportTile.y
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: firstTeleportTile.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: firstTeleportTile.y
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.size
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.data[0].x
@@ -537,8 +553,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c97f1ba29c624794b9d52620fef32f95, type: 3}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: lastTeleportTile.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: lastTeleportTile.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: firstTeleportTile.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: firstTeleportTile.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.size
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.data[0].x
@@ -3014,8 +3046,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c97f1ba29c624794b9d52620fef32f95, type: 3}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: lastTeleportTile.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: lastTeleportTile.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: firstTeleportTile.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.size
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.data[0].x
@@ -4590,8 +4634,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c97f1ba29c624794b9d52620fef32f95, type: 3}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: lastTeleportTile.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: firstTeleportTile.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
+      propertyPath: firstTeleportTile.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.size
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 573492037610845044, guid: 667c62d8dbceed547b3b949eb4b787d1, type: 3}
       propertyPath: teleportTiles.Array.data[0].x

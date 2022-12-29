@@ -6,6 +6,8 @@ public class LavaState : ACantKill, IState
 {
     public Sprite tileSprite;
 
+    public void StateStart() { }
+
     public override void Click(Tile tile)
     {
         isDanger = true;

@@ -7,6 +7,8 @@ public class EmptyState : ACantKill, IState
     public Sprite tileSprite;
     public Sprite dangerTileSprite;
 
+    public void StateStart() { }
+
     public override void Click(Tile tile)
     {
         Vector2 tilePos = tile.transform.position;
