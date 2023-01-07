@@ -18,6 +18,9 @@ public class Manager : MonoBehaviour
     public static Manager link;
     public static Player playerLink;
 
+    public Sprite[] playerTiles;
+    public Sprite[] turretTiles;
+
     public Sprite emtyTileSprite;
     public Sprite dangerEmptyTileSprite;
     public Sprite lavaTileSprite;
@@ -75,7 +78,8 @@ public class Manager : MonoBehaviour
     // метод для апдейта показателя энергии
     public void EnergyUpdate()
     {
-        energyText.text = Manager.playerLink.energy.ToString();
+        energyText.text = playerLink.energy.ToString();
+        playerLink.GetComponent<SpriteRenderer>().sprite = playerTiles[playerLink.energy];
     }
 
     public void CompleteTextAppear()

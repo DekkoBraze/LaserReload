@@ -46,4 +46,5 @@ public class PortalState : ACantKill, IState
     {
         return tileSprite;
     }
+    public void ChangeAngle(IAngle angle) { }
 }

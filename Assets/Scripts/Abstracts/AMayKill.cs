@@ -49,6 +49,7 @@ public abstract class AMayKill : MonoBehaviour
             Destroy(tile.gameObject.GetComponent<TurretState>());
             tile.state = GetComponent<EmptyState>();
             tile.state.ChangeOnSafe(tile);
+            tile.gameObject.transform.eulerAngles = Manager.angle0.angleCoord;
             Messenger.Broadcast(GameEvent.NEXT_STEP);
             Messenger.Broadcast(GameEvent.DANGER_SPAWN);
         }

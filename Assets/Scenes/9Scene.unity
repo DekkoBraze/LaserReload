@@ -3916,6 +3916,17 @@ MonoBehaviour:
   energyText: {fileID: 1571429073}
   completeText: {fileID: 897300891}
   gameOverText: {fileID: 816093925}
+  playerTiles:
+  - {fileID: 21300000, guid: df21beaa000f40746a808fe81b45fd7b, type: 3}
+  - {fileID: 21300000, guid: 15e9b01be7ac53e49a83dac43f0f8f77, type: 3}
+  - {fileID: 21300000, guid: a74d6fd4703e8904e8dac40f13c9b2c8, type: 3}
+  - {fileID: 21300000, guid: d84d268fda7022641857633e3e66393e, type: 3}
+  - {fileID: 21300000, guid: 9548ec06939dfda4e95ed4b4467bd6c2, type: 3}
+  turretTiles:
+  - {fileID: 21300000, guid: 65246431e68bf5b49a8d4f6b49a9d384, type: 3}
+  - {fileID: 21300000, guid: 8f1aff5632b04e64bbe55bc7bb276fb3, type: 3}
+  - {fileID: 21300000, guid: 7cdf4869a80dea841a1e22e7f563714a, type: 3}
+  - {fileID: 21300000, guid: 065d63e229788624ea7691835cb465c5, type: 3}
   emtyTileSprite: {fileID: 21300000, guid: 6d8902681e439b544a6b16683412e695, type: 3}
   dangerEmptyTileSprite: {fileID: 21300000, guid: ac5e81c5791af4240a01b478b1e9a3e4, type: 3}
   lavaTileSprite: {fileID: 21300000, guid: 176a7ab361c6f804bb045af972106376, type: 3}

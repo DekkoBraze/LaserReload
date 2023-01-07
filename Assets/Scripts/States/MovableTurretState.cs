@@ -151,4 +151,9 @@ public class MovableTurretState : AMayKill, IState
             }
         }
     }
+
+    public void ChangeAngle(IAngle angle)
+    {
+
+    }
 }

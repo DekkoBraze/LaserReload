@@ -23,4 +23,5 @@ public class RailState : ACantKill, IState
     {
         return tileSprite;
     }
+    public void ChangeAngle(IAngle angle) { }
 }

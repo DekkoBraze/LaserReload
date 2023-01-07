@@ -53,4 +53,5 @@ public class EmptyState : ACantKill, IState
             dangerTileSprite = Manager.link.dangerEmptyTileSprite;
         }
     }
+    public void ChangeAngle(IAngle angle) { }
 }

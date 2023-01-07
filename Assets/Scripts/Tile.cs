@@ -20,21 +20,25 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        if (transform.eulerAngles == new Vector3(0, 0, 0))
+        if (transform.eulerAngles == Manager.angle0.angleCoord)
         {
             angle = Manager.angle0;
+            state.ChangeAngle(angle);
         }
-        else if (transform.eulerAngles == new Vector3(0, 0, 90))
+        else if (transform.eulerAngles == Manager.angle90.angleCoord)
         {
             angle = Manager.angle90;
+            state.ChangeAngle(angle);
         }
-        else if (transform.eulerAngles == new Vector3(0, 0, 180))
+        else if (transform.eulerAngles == Manager.angle180.angleCoord)
         {
             angle = Manager.angle180;
+            state.ChangeAngle(angle);
         }
         else
         {
             angle = Manager.angle270;
+            state.ChangeAngle(angle);
         }
         state.StateStart();
         state.DangerTilesNumberUpdate(this);
@@ -84,3 +88,5 @@ public class Tile : MonoBehaviour
     }
 }
 // 1. Разобраться, как сделать в палитре удаление любого объекта при выборе ластика (без постоянного переключения по вкладкам)
+// 2. Сделать новый менеджер, который будет отвечать только за спрайты (чтобы не загружать основу)
+// 3. Переделать спрайты для турелей так, чтобы сзади них были голубые линии

@@ -41,4 +41,6 @@ public class LavaState : ACantKill, IState
             tileSprite = Manager.link.lavaTileSprite;
         }
     }
+
+    public void ChangeAngle(IAngle angle) { }
 }
