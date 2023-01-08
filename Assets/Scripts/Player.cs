@@ -8,10 +8,13 @@ public class Player : MonoBehaviour
     // _playersTile - тайл, который в данный момент находится под игроком
     [SerializeField] public Tile playersTile;
 
+    private Animator _anim;
+
     public int energy { get; set; }
 
     void Start()
     {
+        _anim = GetComponent<Animator>();
         energy = 0;
         Manager.link.EnergyUpdate();
         FirstTileSearch();
@@ -79,5 +82,10 @@ public class Player : MonoBehaviour
         {
             playersTile = hit.transform.gameObject.GetComponent<Tile>();
         }
+    }
+
+    public void ChangePlayerAnim()
+    {
+        _anim.SetInteger("Energy", energy);
     }
 }

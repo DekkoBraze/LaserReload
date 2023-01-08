@@ -18,9 +18,9 @@ public class Manager : MonoBehaviour
     public static Manager link;
     public static Player playerLink;
 
-    public Sprite[] playerTiles;
     public Sprite[] turretTiles;
 
+    public GameObject backgroundEmptyTile;
     public Sprite emtyTileSprite;
     public Sprite dangerEmptyTileSprite;
     public Sprite lavaTileSprite;
@@ -79,7 +79,7 @@ public class Manager : MonoBehaviour
     public void EnergyUpdate()
     {
         energyText.text = playerLink.energy.ToString();
-        playerLink.GetComponent<SpriteRenderer>().sprite = playerTiles[playerLink.energy];
+        playerLink.ChangePlayerAnim();
     }
 
     public void CompleteTextAppear()
