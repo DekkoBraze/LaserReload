@@ -88,4 +88,18 @@ public class Player : MonoBehaviour
     {
         _anim.SetInteger("Energy", energy);
     }
+
+    public void StartPrivateCoroutine()
+    {
+        StartCoroutine(StartAttackAnim());
+    }
+
+    public IEnumerator StartAttackAnim()
+    {
+        _anim.SetBool("Attack", true);
+
+        yield return new WaitForSeconds(0.05f);
+
+        _anim.SetBool("Attack", false);
+    }
 }
