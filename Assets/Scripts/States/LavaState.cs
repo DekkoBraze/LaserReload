@@ -43,4 +43,5 @@ public class LavaState : ACantKill, IState
     }
 
     public void ChangeAngle(IAngle angle) { }
+    public void StateDestroy() { }
 }

@@ -54,4 +54,6 @@ public class EmptyState : ACantKill, IState
         }
     }
     public void ChangeAngle(IAngle angle) { }
+
+    public void StateDestroy() { }
 }

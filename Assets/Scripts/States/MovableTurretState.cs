@@ -156,4 +156,5 @@ public class MovableTurretState : AMayKill, IState
     {
 
     }
+    public void StateDestroy() { }
 }

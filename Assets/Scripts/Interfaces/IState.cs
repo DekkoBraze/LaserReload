@@ -14,4 +14,5 @@ public interface IState
     void CheckMovableTurretMove(Tile tile);
     void ChangeAngle(IAngle angle);
     Sprite GetSprite();
+    void StateDestroy();
 }

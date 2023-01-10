@@ -93,4 +93,10 @@ public class TurretState : AMayKill, IState
             _anim.Play(animName);
         }
     }
+
+    public void StateDestroy()
+    {
+        string animName = "TurretTileExplotion" + angleNum;
+        _anim.Play(animName);
+    }
 }
