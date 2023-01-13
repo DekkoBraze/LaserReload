@@ -9,15 +9,31 @@ public class Player : MonoBehaviour
     [SerializeField] public Tile playersTile;
 
     private Animator _anim;
+    private SpriteRenderer _renderer;
+    private Color visibility;
+
+    private bool disappearenceAnim = false;
 
     public int energy { get; set; }
 
     void Start()
     {
         _anim = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
         energy = 0;
         Manager.link.EnergyUpdate();
         FirstTileSearch();
+    }
+
+    void Update()
+    {
+        if (disappearenceAnim) 
+        {
+            visibility = _renderer.color;
+            visibility.a -= Time.deltaTime;
+            visibility.a = Mathf.Clamp(visibility.a, 0, 1);
+            _renderer.color = visibility;
+        }
     }
 
     public bool MoveCheck(Vector2 tilePos)
@@ -40,6 +56,16 @@ public class Player : MonoBehaviour
 
     public void PlayerDestroy()
     {
+        StartCoroutine(DestroyCoroutine());
+    }
+
+    private IEnumerator DestroyCoroutine()
+    {
+        _anim.Play("PlayerExplotion");
+        Manager.link.isItOver = true;
+
+        yield return new WaitForSeconds(0.4f);
+
         Destroy(this.gameObject);
     }
 
@@ -101,5 +127,10 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
 
         _anim.SetBool("Attack", false);
+    }
+
+    public void PlayerDisappearAnim()
+    {
+        disappearenceAnim = true;
     }
 }

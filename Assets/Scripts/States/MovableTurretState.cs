@@ -8,14 +8,23 @@ public class MovableTurretState : AMayKill, IState
 
     public bool isInfinite;
 
+    private Animator _anim;
+
     public Vector2[] teleportTiles;
 
     public Vector2 firstTeleportTile;
     public Vector2 lastTeleportTile;
 
+    private void Awake()
+    {
+        _anim = gameObject.GetComponent<Animator>();
+    }
+
     public void StateStart()
     {
         CalculateMovablePath();
+        _anim.SetBool("isInfinite", isInfinite);
+        StartCoroutine(StartBlinkAnim());
     }
 
     public void SpriteUpdate(Tile tile)
@@ -91,7 +100,7 @@ public class MovableTurretState : AMayKill, IState
             {
                 if (oldPlayersPosition == Manager.playerLink.playersTile && newPlayersPosition == Manager.link.clickedTile)
                 {
-                    Debug.Log("You were slashed by laser!");
+                    FireAnim();
                     Manager.playerLink.PlayerDestroy();
                     Manager.link.OnPlayerDestroy();
                     Manager.link.isItOver = true;
@@ -157,4 +166,39 @@ public class MovableTurretState : AMayKill, IState
 
     }
     public void StateDestroy() { }
+
+    private IEnumerator StartBlinkAnim()
+    {
+        while (true)
+        {
+            int blinkTime = Random.Range(5, 30);
+
+            yield return new WaitForSeconds(blinkTime);
+
+            string animName;
+            if (isInfinite)
+            {
+                animName = "InfiniteMovableBlink";
+            }
+            else
+            {
+                animName = "MovableBlink";
+            }
+            _anim.Play(animName);
+        }
+    }
+
+    public void FireAnim() 
+    {
+        string animName;
+        if (isInfinite)
+        {
+            animName = "InfiniteMovableFire";
+        }
+        else
+        {
+            animName = "MovableFire";
+        }
+        _anim.Play(animName);
+    }
 }

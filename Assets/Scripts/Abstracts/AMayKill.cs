@@ -11,6 +11,8 @@ public abstract class AMayKill : MonoBehaviour
     // колличество спавнящихся Danger тайлов
     private int _trueDangerTilesNumber;
 
+    private bool unclickable = false;
+
     public int dangerTilesNumber
     {
         get { return _trueDangerTilesNumber; }
@@ -27,18 +29,19 @@ public abstract class AMayKill : MonoBehaviour
 
     public virtual void Click(Tile tile)
     {
-        if (Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
+        if (!unclickable && Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
         {
-            StartCoroutine(TileDestroy(tile));
+            StartCoroutine(EnemyDestroy(tile));
         }
     }
 
-    private IEnumerator TileDestroy(Tile tile)
+    private IEnumerator EnemyDestroy(Tile tile)
     {
         tile.state.StateDestroy();
         Manager.playerLink.StartPrivateCoroutine();
+        unclickable = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
 
         int dangersNum = dangerTilesNumber;
         Tile[] dangers = dangerTiles;
@@ -107,18 +110,24 @@ public abstract class AMayKill : MonoBehaviour
         if (canPlaceTile)
         {
             Tile hitTile = hits[0].collider.gameObject.GetComponent<Tile>();
-            hitTile.state.ChangeOnDanger(hitTile);
+            hitTile.state.ChangeOnDanger(hitTile, this.gameObject);
             dangerTiles[i - 1] = hitTile;
             // проверка того, стоит ли игрок на изменяемом тайле и gameOver в случае true
             Vector2 player_pos = Manager.playerLink.transform.position;
             if (pos == player_pos)
             {
+                hitTile.state.EnemyLordLink().GetComponent<Tile>().state.FireAnim();
                 Manager.link.OnPlayerDestroy();
-                Destroy(Manager.playerLink.gameObject);
+                Manager.playerLink.PlayerDestroy();
             }
         }
     }
 
-    public void ChangeOnDanger(Tile tile) { }
+    public void ChangeOnDanger(Tile tile, GameObject enemy) { }
     public void ChangeOnSafe(Tile tile) { }
+
+    public GameObject EnemyLordLink() 
+    {
+        return null;
+    }
 }

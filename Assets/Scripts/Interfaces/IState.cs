@@ -9,10 +9,12 @@ public interface IState
     void DangerTilesNumberUpdate(Tile tile);
     void DangerTilesSpawn(Tile tile);
     void NextMove(Tile tile);
-    void ChangeOnDanger(Tile tile);
+    void ChangeOnDanger(Tile tile, GameObject enemy);
     void ChangeOnSafe(Tile tile);
     void CheckMovableTurretMove(Tile tile);
     void ChangeAngle(IAngle angle);
     Sprite GetSprite();
+    void FireAnim();
+    GameObject EnemyLordLink();
     void StateDestroy();
 }

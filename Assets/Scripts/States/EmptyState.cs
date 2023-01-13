@@ -24,16 +24,16 @@ public class EmptyState : ACantKill, IState
     {
         dangerTilesNumber = 0;
     }
-    public void ChangeOnDanger(Tile tile)
+    public void ChangeOnDanger(Tile tile, GameObject enemy)
     {
         spriteCheck();
-        isDanger = true;
+        enemyLord = enemy;
         tile.SetSprite(dangerTileSprite);
     }
     public void ChangeOnSafe(Tile tile)
     {
         spriteCheck();
-        isDanger = false;
+        enemyLord = null;
         tile.SetSprite(tileSprite);
     }
 

@@ -17,8 +17,9 @@ public class PortalState : ACantKill, IState
             Manager.link.clickedTile = tile;
             Manager.playerLink.PlayerChangePosition(tilePos);
             base.Click(tile);
-            if (!isDanger && !Manager.link.isItOver)
+            if (enemyLord == null && !Manager.link.isItOver)
             {
+                Manager.playerLink.PlayerDisappearAnim();
                 Manager.link.CompleteTextAppear();
                 Manager.link.isItOver = true;
             }
@@ -32,14 +33,14 @@ public class PortalState : ACantKill, IState
     {
         dangerTilesNumber = 0;
     }
-    public void ChangeOnDanger(Tile tile)
+    public void ChangeOnDanger(Tile tile, GameObject enemy)
     {
-        isDanger = true;
+        enemyLord = enemy;
         tile.SetSprite(dangerTileSprite);
     }
     public void ChangeOnSafe(Tile tile)
     {
-        isDanger = false;
+        enemyLord = null;
         tile.SetSprite(tileSprite);
     }
     public Sprite GetSprite()

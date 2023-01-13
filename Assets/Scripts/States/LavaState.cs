@@ -10,7 +10,7 @@ public class LavaState : ACantKill, IState
 
     public override void Click(Tile tile)
     {
-        isDanger = true;
+        enemyLord = this.gameObject;
         Vector2 tilePos = tile.transform.position;
         if (Manager.playerLink.MoveCheck(tilePos))
         {
@@ -31,7 +31,7 @@ public class LavaState : ACantKill, IState
         return tileSprite;
     }
 
-    public void ChangeOnDanger(Tile tile) { }
+    public void ChangeOnDanger(Tile tile, GameObject enemy) { }
     public void ChangeOnSafe(Tile tile) { }
 
     private void SpriteCheck()
