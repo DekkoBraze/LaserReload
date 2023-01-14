@@ -11,6 +11,11 @@ public class MainMenu : MonoBehaviour
 
     bool isFullScreen = false;
 
+    private void Awake()
+    {
+        isFullScreen = Screen.fullScreen;
+    }
+
     public void StartLevel(GameObject scene)
     {
         SceneManager.LoadScene(scene.name);

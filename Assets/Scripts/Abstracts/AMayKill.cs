@@ -134,7 +134,10 @@ public abstract class AMayKill : MonoBehaviour
     {
         foreach (Tile tile in dangerTiles)
         {
-            tile.state.AfterPlayerDestroy();
+            if (tile)
+            {
+                tile.state.AfterPlayerDestroy();
+            }
         }
     }
 }

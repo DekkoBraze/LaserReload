@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class Manager : MonoBehaviour
 {
     [SerializeField] private TMP_Text energyText;
-    [SerializeField] private TMP_Text completeText;
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject completeScreen;
     [SerializeField] private GameObject gameOverScreen;

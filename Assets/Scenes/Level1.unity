@@ -282,11 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4653339185309431633, guid: b0c90155a56241e4083e87d878e8f81a, type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4653339185309431633, guid: b0c90155a56241e4083e87d878e8f81a, type: 3}
       propertyPath: m_SortingLayerID
-      value: 0
+      value: -2033132729
       objectReference: {fileID: 0}
     - target: {fileID: 4653339185309431646, guid: b0c90155a56241e4083e87d878e8f81a, type: 3}
       propertyPath: m_RootOrder
@@ -1744,7 +1744,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyText: {fileID: 1571429073}
-  completeText: {fileID: 897300891}
   menu: {fileID: 152582184}
   completeScreen: {fileID: 1880160321}
   gameOverScreen: {fileID: 954878140}
