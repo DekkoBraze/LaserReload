@@ -33,7 +33,7 @@ public class PortalState : ACantKill, IState
     {
         dangerTilesNumber = 0;
     }
-    public void ChangeOnDanger(Tile tile, GameObject enemy)
+    public void ChangeOnDanger(Tile tile, Tile enemy)
     {
         enemyLord = enemy;
         tile.SetSprite(dangerTileSprite);
@@ -43,6 +43,11 @@ public class PortalState : ACantKill, IState
         enemyLord = null;
         tile.SetSprite(tileSprite);
     }
+    public override void AfterPlayerDestroy()
+    {
+        this.gameObject.GetComponent<Tile>().SetSprite(Manager.link.dangerPortalAfterDeath);
+    }
+
     public Sprite GetSprite()
     {
         return tileSprite;

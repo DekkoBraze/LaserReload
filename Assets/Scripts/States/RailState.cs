@@ -17,7 +17,7 @@ public class RailState : ACantKill, IState
     {
         dangerTilesNumber = 0;
     }
-    public void ChangeOnDanger(Tile tile, GameObject enemy) { }
+    public void ChangeOnDanger(Tile tile, Tile enemy) { }
     public void ChangeOnSafe(Tile tile) { }
     public Sprite GetSprite()
     {
