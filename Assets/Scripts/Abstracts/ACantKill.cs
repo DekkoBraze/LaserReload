@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class ACantKill : MonoBehaviour
 {
     // Сохраняет тайл, который делает данный денжером
-    public GameObject enemyLord;
+    public Tile enemyLord;
 
     // колличество спавнящихся Danger тайлов
     public int dangerTilesNumber = 0;
@@ -18,7 +18,8 @@ public abstract class ACantKill : MonoBehaviour
         Messenger.Broadcast(GameEvent.DANGER_SPAWN);
         if (enemyLord != null)
             {
-            enemyLord.GetComponent<Tile>().state.FireAnim();
+            enemyLord.state.FireAnim();
+            enemyLord.state.AfterPlayerDestroy();
                 Manager.link.OnPlayerDestroy();
                 Manager.playerLink.PlayerDestroy();
             }
@@ -37,9 +38,12 @@ public abstract class ACantKill : MonoBehaviour
     public void CheckMovableTurretMove(Tile tile) { }
     public void FireAnim() { }
 
-    public GameObject EnemyLordLink()
+    public Tile EnemyLordLink()
     {
         return enemyLord;
     }
+    public virtual void AfterPlayerDestroy()
+    {
 
+    }
 }

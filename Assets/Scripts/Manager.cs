@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
     [SerializeField] private TMP_Text energyText;
-    [SerializeField] private TMP_Text completeText;
-    [SerializeField] private TMP_Text gameOverText;
+    [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject completeScreen;
+    [SerializeField] private GameObject gameOverScreen;
 
     public static Angle0 angle0;
     public static Angle90 angle90;
@@ -24,8 +26,11 @@ public class Manager : MonoBehaviour
     public Sprite emtyTileSprite;
     public Sprite dangerEmptyTileSprite;
     public Sprite lavaTileSprite;
+    public Sprite dangerAfterDeath;
+    public Sprite dangerPortalAfterDeath;
 
     public Tile clickedTile { get; set; }
+    public bool isMenuOn { get; set; } = false;
     public static int stepCount { get; set; } = 0;
     public bool isItOver { get; set; }
 
@@ -46,8 +51,6 @@ public class Manager : MonoBehaviour
     private void Start()
     {
         isItOver = false;
-        completeText.enabled = false;
-        gameOverText.enabled = false;
     }
 
     private void Update()
@@ -56,6 +59,12 @@ public class Manager : MonoBehaviour
         {
             stepCount = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isMenuOn = !isMenuOn;
+            menu.SetActive(isMenuOn);
+            isItOver = isMenuOn;
         }
     }
 
@@ -67,7 +76,7 @@ public class Manager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        gameOverText.enabled = true;
+        gameOverScreen.SetActive(true);
 
         yield return new WaitForSeconds(1);
 
@@ -84,7 +93,8 @@ public class Manager : MonoBehaviour
 
     public void CompleteTextAppear()
     {
-        completeText.enabled = true;
+        completeScreen.SetActive(true);
+        //completeText.enabled = true;
     }
 
     public void OnPlayerDestroy()

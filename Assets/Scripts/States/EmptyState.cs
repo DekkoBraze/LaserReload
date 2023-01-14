@@ -24,7 +24,7 @@ public class EmptyState : ACantKill, IState
     {
         dangerTilesNumber = 0;
     }
-    public void ChangeOnDanger(Tile tile, GameObject enemy)
+    public void ChangeOnDanger(Tile tile, Tile enemy)
     {
         spriteCheck();
         enemyLord = enemy;
@@ -35,6 +35,11 @@ public class EmptyState : ACantKill, IState
         spriteCheck();
         enemyLord = null;
         tile.SetSprite(tileSprite);
+    }
+
+    public override void AfterPlayerDestroy()
+    {
+        this.gameObject.GetComponent<Tile>().SetSprite(Manager.link.dangerAfterDeath);
     }
 
     public Sprite GetSprite()

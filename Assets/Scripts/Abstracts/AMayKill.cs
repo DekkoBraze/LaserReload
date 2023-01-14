@@ -110,7 +110,7 @@ public abstract class AMayKill : MonoBehaviour
         if (canPlaceTile)
         {
             Tile hitTile = hits[0].collider.gameObject.GetComponent<Tile>();
-            hitTile.state.ChangeOnDanger(hitTile, this.gameObject);
+            hitTile.state.ChangeOnDanger(hitTile, this.gameObject.GetComponent<Tile>());
             dangerTiles[i - 1] = hitTile;
             // проверка того, стоит ли игрок на изменяемом тайле и gameOver в случае true
             Vector2 player_pos = Manager.playerLink.transform.position;
@@ -123,11 +123,21 @@ public abstract class AMayKill : MonoBehaviour
         }
     }
 
-    public void ChangeOnDanger(Tile tile, GameObject enemy) { }
+    public void ChangeOnDanger(Tile tile, Tile enemy) { }
     public void ChangeOnSafe(Tile tile) { }
 
-    public GameObject EnemyLordLink() 
+    public Tile EnemyLordLink() 
     {
         return null;
+    }
+    public void AfterPlayerDestroy()
+    {
+        foreach (Tile tile in dangerTiles)
+        {
+            if (tile)
+            {
+                tile.state.AfterPlayerDestroy();
+            }
+        }
     }
 }
