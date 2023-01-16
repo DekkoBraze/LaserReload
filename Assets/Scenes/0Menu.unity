@@ -2956,6 +2956,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 573833185}
     m_Modifications:
+    - target: {fileID: 8040501247605856732, guid: d3b28f704c38a3344b4eb6b0285919e4, type: 3}
+      propertyPath: m_text
+      value: "You are tiny robot. \nYour mission is to get to the portal through
+        guarded dungeon. \nYour main tool is a plasma gun, which is in the robot's
+        head. Its charge, which indicates the distance in tiles that the robot is
+        able to shoot, accumulates as you walk: one tile is one charge, maximum is
+        4. The charge counter is the robot's eyes: the more they are filled with
+        energy, the more charge he has.\nIn the dungeon you will meet turrets that
+        can incinerate the hero with their deadly lasers.\nUse R button to reload
+        level.\nGood luck!"
+      objectReference: {fileID: 0}
     - target: {fileID: 8040501248537716360, guid: d3b28f704c38a3344b4eb6b0285919e4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -3253,7 +3253,7 @@ MonoBehaviour:
     accumulates as you walk: one tile is one charge, maximum is 4. The charge counter
     is the robot's eyes: the more they are filled with energy, the more charge he
     has.\nIn the dungeon you will meet turrets that can incinerate the hero with
-    their deadly lasers.\nGood luck!"
+    their deadly lasers.\nUse R button to reload level.\nGood luck!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
