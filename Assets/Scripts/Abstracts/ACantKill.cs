@@ -12,12 +12,14 @@ public abstract class ACantKill : MonoBehaviour
 
     public virtual void Click(Tile tile)
     {
+        Messenger.Broadcast(GameEvent.STEP_SOUND);
         // смена хода для двигающихся тайлов
         Manager.stepCount++;
         Messenger.Broadcast(GameEvent.NEXT_STEP);
         Messenger.Broadcast(GameEvent.DANGER_SPAWN);
         if (enemyLord != null)
             {
+            Messenger.Broadcast(GameEvent.ENEMY_SHOOT_SOUND);
             enemyLord.state.FireAnim();
             enemyLord.state.AfterPlayerDestroy();
                 Manager.link.OnPlayerDestroy();

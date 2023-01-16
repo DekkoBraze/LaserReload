@@ -57,11 +57,13 @@ public class Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            Messenger.Broadcast(GameEvent.BUTTON_SOUND);
             stepCount = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Messenger.Broadcast(GameEvent.BUTTON_SOUND);
             isMenuOn = !isMenuOn;
             menu.SetActive(isMenuOn);
             isItOver = isMenuOn;

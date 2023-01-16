@@ -19,6 +19,7 @@ public class PortalState : ACantKill, IState
             base.Click(tile);
             if (enemyLord == null && !Manager.link.isItOver)
             {
+                Messenger.Broadcast(GameEvent.TELEPORT_SOUND);
                 Manager.playerLink.PlayerDisappearAnim();
                 Manager.link.CompleteTextAppear();
                 Manager.link.isItOver = true;

@@ -101,6 +101,7 @@ public class MovableTurretState : AMayKill, IState
                 if (oldPlayersPosition == Manager.playerLink.playersTile && newPlayersPosition == Manager.link.clickedTile)
                 {
                     FireAnim();
+                    Messenger.Broadcast(GameEvent.ENEMY_SHOOT_SOUND);
                     Manager.playerLink.PlayerDestroy();
                     Manager.link.OnPlayerDestroy();
                     Manager.link.isItOver = true;

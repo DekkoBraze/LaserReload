@@ -87,3 +87,6 @@ public class Tile : MonoBehaviour
         Messenger.RemoveListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove); 
     }
 }
+// Убрать баг, при котором данжер тайлы не успевают удалиться после убийства врага и игрок умирает
+// Сообразить, как сделать так, чтобы при выключении музыки зву оставался
+// Найти нормальные шрифты (а не это васянство ебаное)

@@ -31,6 +31,7 @@ public abstract class AMayKill : MonoBehaviour
     {
         if (!unclickable && Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
         {
+            Messenger.Broadcast(GameEvent.PLAYER_SHOOT_SOUND);
             StartCoroutine(EnemyDestroy(tile));
         }
     }
@@ -116,6 +117,7 @@ public abstract class AMayKill : MonoBehaviour
             Vector2 player_pos = Manager.playerLink.transform.position;
             if (pos == player_pos)
             {
+                Messenger.Broadcast(GameEvent.ENEMY_SHOOT_SOUND);
                 hitTile.state.EnemyLordLink().GetComponent<Tile>().state.FireAnim();
                 Manager.link.OnPlayerDestroy();
                 Manager.playerLink.PlayerDestroy();

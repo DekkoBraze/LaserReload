@@ -8,6 +8,7 @@ TagManager:
   - PlayerPosition
   - Enemy
   - Folder
+  - MusicManager
   layers:
   - Default
   - TransparentFX
