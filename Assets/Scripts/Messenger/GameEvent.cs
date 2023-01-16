@@ -10,6 +10,7 @@ public static class GameEvent
     public const string ENEMY_SHOOT_SOUND = "ENEMY_SHOOT_SOUND";
     public const string BUTTON_SOUND = "BUTTON_SOUND";
     public const string TELEPORT_SOUND = "TELEPORT_SOUND";
+    public const string RELOAD_LEVEL_SOUND = "RELOAD_LEVEL_SOUND";
     public const string OFF_SOUND = "OFF_SOUND";
     public const string ON_SOUND = "ON_SOUND";
     public const string OFF_MUSIC = "OFF_MUSIC";

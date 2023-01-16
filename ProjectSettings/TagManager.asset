@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Folder
   - MusicManager
+  - SoundManager
   layers:
   - Default
   - TransparentFX

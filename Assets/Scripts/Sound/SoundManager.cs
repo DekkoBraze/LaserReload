@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     AudioSource source;
     [SerializeField] private AudioClip step;
@@ -10,8 +10,11 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioClip enemyShoot;
     [SerializeField] private AudioClip button;
     [SerializeField] private AudioClip teleport;
+    [SerializeField] private AudioClip reloadLevel;
 
     private float soundVol = 1;
+
+    public static bool isSoundOn = true;
 
     private void Awake()
     {
@@ -22,8 +25,7 @@ public class MusicManager : MonoBehaviour
         Messenger.AddListener(GameEvent.TELEPORT_SOUND, TeleportSound);
         Messenger.AddListener(GameEvent.OFF_SOUND, TurnOffSound);
         Messenger.AddListener(GameEvent.ON_SOUND, TurnOnSound);
-        Messenger.AddListener(GameEvent.OFF_MUSIC, TurnOffMusic);
-        Messenger.AddListener(GameEvent.ON_MUSIC, TurnOnMusic);
+        Messenger.AddListener(GameEvent.RELOAD_LEVEL_SOUND, ReloadLevelSound);
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("MusicManager");
 
@@ -52,12 +54,12 @@ public class MusicManager : MonoBehaviour
 
     private void EnemyShootSound()
     {
-        source.PlayOneShot(enemyShoot, soundVol);
+        source.PlayOneShot(enemyShoot, (soundVol-0.65f));
     }
 
     private void ButtonSound()
     {
-        source.PlayOneShot(button, soundVol);
+        source.PlayOneShot(button, (soundVol - 0.5f));
     }
 
     private void TeleportSound()
@@ -65,25 +67,24 @@ public class MusicManager : MonoBehaviour
         source.PlayOneShot(teleport, soundVol);
     }
 
+    private void ReloadLevelSound()
+    {
+        source.PlayOneShot(reloadLevel, soundVol);
+    }
+
     private void TurnOffSound()
     {
         soundVol = 0;
+        isSoundOn = false;
     }
 
     private void TurnOnSound()
     {
         soundVol = 1;
+        isSoundOn = true;
     }
 
-    private void TurnOffMusic()
-    {
-        source.volume = 0;
-    }
-
-    private void TurnOnMusic()
-    {
-        source.volume = 0.2f;
-    }
+    
 
     private void OnDestroy()
     {
@@ -94,7 +95,6 @@ public class MusicManager : MonoBehaviour
         Messenger.RemoveListener(GameEvent.TELEPORT_SOUND, TeleportSound);
         Messenger.RemoveListener(GameEvent.OFF_SOUND, TurnOffSound);
         Messenger.RemoveListener(GameEvent.ON_SOUND, TurnOnSound);
-        Messenger.RemoveListener(GameEvent.OFF_MUSIC, TurnOffMusic);
-        Messenger.RemoveListener(GameEvent.ON_MUSIC, TurnOnMusic);
+        Messenger.RemoveListener(GameEvent.RELOAD_LEVEL_SOUND, ReloadLevelSound);
     }
 }

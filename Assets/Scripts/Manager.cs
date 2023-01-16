@@ -57,7 +57,7 @@ public class Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Messenger.Broadcast(GameEvent.BUTTON_SOUND);
+            Messenger.Broadcast(GameEvent.RELOAD_LEVEL_SOUND);
             stepCount = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -89,7 +89,7 @@ public class Manager : MonoBehaviour
     // метод для апдейта показателя энергии
     public void EnergyUpdate()
     {
-        energyText.text = playerLink.energy.ToString();
+        //energyText.text = playerLink.energy.ToString();
         playerLink.ChangePlayerAnim();
     }
 

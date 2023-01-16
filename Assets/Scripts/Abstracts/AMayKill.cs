@@ -29,7 +29,7 @@ public abstract class AMayKill : MonoBehaviour
 
     public virtual void Click(Tile tile)
     {
-        if (!unclickable && Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
+        if (!Manager.link.isItOver && !unclickable && Manager.playerLink.EnemyHitCheck(tile.gameObject.transform.position))
         {
             Messenger.Broadcast(GameEvent.PLAYER_SHOOT_SOUND);
             StartCoroutine(EnemyDestroy(tile));
@@ -39,11 +39,6 @@ public abstract class AMayKill : MonoBehaviour
     private IEnumerator EnemyDestroy(Tile tile)
     {
         tile.state.StateDestroy();
-        Manager.playerLink.StartPrivateCoroutine();
-        unclickable = true;
-
-        yield return new WaitForSeconds(0.4f);
-
         int dangersNum = dangerTilesNumber;
         Tile[] dangers = dangerTiles;
         // смена хода для двигающихся тайлов
@@ -60,6 +55,11 @@ public abstract class AMayKill : MonoBehaviour
             }
         }
         dangerTilesNumber = 0;
+        Manager.playerLink.StartPrivateCoroutine();
+        unclickable = true;
+
+        yield return new WaitForSeconds(0.4f);
+
         // изменение типа врага на Empty
         tile.gameObject.AddComponent<EmptyState>();
         Destroy(tile.gameObject.GetComponent<TurretState>());
