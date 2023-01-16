@@ -99,4 +99,12 @@ public class GUILevelManager : MonoBehaviour
     {
         Messenger.Broadcast(GameEvent.BUTTON_SOUND);
     }
+    public void ReloadSceneButton()
+    {
+        Manager.link.ReloadScene();
+    }
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

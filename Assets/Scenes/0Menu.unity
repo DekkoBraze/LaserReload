@@ -747,7 +747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &290714405
@@ -772,8 +772,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: How to Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
+  m_sharedMaterial: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -797,15 +797,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -925,6 +925,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Music
       objectReference: {fileID: 0}
+    - target: {fileID: 6982248653688993868, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
+    - target: {fileID: 6982248653688993868, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
     - target: {fileID: 6982248654200183681, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_Name
       value: Music
@@ -1069,12 +1077,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
   m_PrefabInstance: {fileID: 550877921}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 550877924}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &550877924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6982248654200183681, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+  m_PrefabInstance: {fileID: 550877921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &573833181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,7 +1541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &949576607
@@ -1553,8 +1566,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
+  m_sharedMaterial: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1578,15 +1591,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1639,6 +1652,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Sound
       objectReference: {fileID: 0}
+    - target: {fileID: 6982248653688993868, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
+    - target: {fileID: 6982248653688993868, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
     - target: {fileID: 6982248654200183681, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_Name
       value: Sound
@@ -1783,12 +1804,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
   m_PrefabInstance: {fileID: 953922766}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 953922769}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &953922769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6982248654200183681, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+  m_PrefabInstance: {fileID: 953922766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1053937675 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6982248654200183682, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
@@ -1964,7 +1990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228406458
@@ -1989,8 +2015,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
+  m_sharedMaterial: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2014,15 +2040,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2184,7 +2210,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664242299
 MonoBehaviour:
@@ -2208,8 +2234,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LASER RELOAD
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
+  m_sharedMaterial: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2352,6 +2378,14 @@ PrefabInstance:
       propertyPath: levelMenu
       value: 
       objectReference: {fileID: 657590310}
+    - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: musicToggle
+      value: 
+      objectReference: {fileID: 550877924}
+    - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: soundToggle
+      value: 
+      objectReference: {fileID: 953922769}
     - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
       propertyPath: howToPlayMenu
       value: 
@@ -2766,6 +2800,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 285943267}
     m_Modifications:
+    - target: {fileID: 6982248653688993868, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
+    - target: {fileID: 6982248653688993868, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
     - target: {fileID: 6982248654200183681, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_Name
       value: FullScreen
@@ -2836,7 +2878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6982248654200183682, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 373.8
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 6982248654200183682, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_AnchoredPosition.y

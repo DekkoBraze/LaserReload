@@ -11,16 +11,14 @@ public class GUIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject levelMenu;
     [SerializeField] private GameObject howToPlayMenu;
-    private GameObject musicToggle;
-    private GameObject soundToggle;
+    [SerializeField] private GameObject musicToggle;
+    [SerializeField] private GameObject soundToggle;
 
     bool isFullScreen = false;
 
     private void Awake()
     {
         isFullScreen = Screen.fullScreen;
-        musicToggle = GameObject.Find("Music");
-        soundToggle = GameObject.Find("Sound");
         if (MusicManager.isMusicOn)
         {
             musicToggle.GetComponent<Image>().sprite = toggleTrue;

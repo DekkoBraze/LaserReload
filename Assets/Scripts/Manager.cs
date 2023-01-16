@@ -57,9 +57,7 @@ public class Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Messenger.Broadcast(GameEvent.RELOAD_LEVEL_SOUND);
-            stepCount = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            ReloadScene();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -78,11 +76,11 @@ public class Manager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        gameOverScreen.SetActive(true);
+        
 
         yield return new WaitForSeconds(1);
 
-        stepCount = 0;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -96,11 +94,19 @@ public class Manager : MonoBehaviour
     public void CompleteTextAppear()
     {
         completeScreen.SetActive(true);
-        //completeText.enabled = true;
+        stepCount = 0;
     }
 
     public void OnPlayerDestroy()
     {
-        StartCoroutine(GameOver());
+        gameOverScreen.SetActive(true);
+        stepCount = 0;
+    }
+
+    public void ReloadScene()
+    {
+        Messenger.Broadcast(GameEvent.RELOAD_LEVEL_SOUND);
+        stepCount = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
