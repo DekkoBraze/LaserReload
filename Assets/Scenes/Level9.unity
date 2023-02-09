@@ -6673,6 +6673,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1714820009345967919, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 5832618285729882052, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -6760,6 +6764,30 @@ PrefabInstance:
     - target: {fileID: 5832618285729882056, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_Name
       value: GameCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618285895274300, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618287021100774, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_text
+      value: Thank you for playing!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618287021100774, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618287021100774, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618287021100775, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239614276322403937, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
