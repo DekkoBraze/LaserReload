@@ -1842,6 +1842,7 @@ MonoBehaviour:
   menu: {fileID: 1360092589}
   completeScreen: {fileID: 1360092591}
   gameOverScreen: {fileID: 1360092590}
+  soundManager: {fileID: 8925960942708982843, guid: 2c84b066280a21244b376014942cf20d, type: 3}
   turretTiles:
   - {fileID: 21300000, guid: 65246431e68bf5b49a8d4f6b49a9d384, type: 3}
   - {fileID: 21300000, guid: 8f1aff5632b04e64bbe55bc7bb276fb3, type: 3}
@@ -2620,6 +2621,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 858558761}
     m_Modifications:
+    - target: {fileID: 2839694132616913952, guid: 25539673ab515bb49b5422d9e0073f50, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f1aff5632b04e64bbe55bc7bb276fb3, type: 3}
     - target: {fileID: 3202753169473068193, guid: 25539673ab515bb49b5422d9e0073f50, type: 3}
       propertyPath: m_Name
       value: Turret
@@ -2809,6 +2814,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 858558761}
     m_Modifications:
+    - target: {fileID: 2839694132616913952, guid: 25539673ab515bb49b5422d9e0073f50, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f1aff5632b04e64bbe55bc7bb276fb3, type: 3}
     - target: {fileID: 3202753169473068193, guid: 25539673ab515bb49b5422d9e0073f50, type: 3}
       propertyPath: m_Name
       value: Turret

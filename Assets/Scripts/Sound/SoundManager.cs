@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
         Messenger.AddListener(GameEvent.ON_SOUND, TurnOnSound);
         Messenger.AddListener(GameEvent.RELOAD_LEVEL_SOUND, ReloadLevelSound);
 
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("MusicManager");
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("SoundManager");
 
         if (objs.Length > 1)
         {

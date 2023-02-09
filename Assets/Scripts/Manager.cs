@@ -11,6 +11,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject completeScreen;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject soundManager;
 
     public static Angle0 angle0;
     public static Angle90 angle90;
@@ -44,6 +45,8 @@ public class Manager : MonoBehaviour
         angle270 = new Angle270();
 
         playerLink = FindObjectOfType<Player>();
+
+        Instantiate(soundManager);
 
         Messenger.Broadcast(GameEvent.SET_STATE);
     }
