@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 315656273396497002}
-  - component: {fileID: 315656273396497003}
+  - component: {fileID: 7157573097203471007}
   m_Layer: 0
   m_Name: GUIManager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &315656273396497003
+--- !u!114 &7157573097203471007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 315656273396497005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb2d075be51bb0e40bf4642a5eb62847, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a4bb98c971c0704fa1907f5129207f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   toggleFalse: {fileID: 21300000, guid: 9c4c44111fa0425488e9d98af2b62e6c, type: 3}
   toggleTrue: {fileID: 21300000, guid: 5e063c04d5a938e43ba25279ee578f5a, type: 3}
-  mainMenu: {fileID: 4602234940684612851, guid: 824a16b0ba402e441b51353703c26deb, type: 3}
-  levelMenu: {fileID: 5364035128938562066, guid: f7152211e25c82f41b790b19d96693d0, type: 3}
-  howToPlayMenu: {fileID: 8040501248537716367, guid: d3b28f704c38a3344b4eb6b0285919e4, type: 3}
+  mainMenu: {fileID: 0}
+  levelMenu: {fileID: 0}
+  howToPlayMenu: {fileID: 0}
+  musicToggle: {fileID: 0}
+  soundToggle: {fileID: 0}
+  menu: {fileID: 0}

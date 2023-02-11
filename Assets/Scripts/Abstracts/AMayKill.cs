@@ -42,7 +42,7 @@ public abstract class AMayKill : MonoBehaviour
         int dangersNum = dangerTilesNumber;
         Tile[] dangers = dangerTiles;
         // смена хода для двигающихся тайлов
-        Manager.stepCount++;
+        Manager.link.stepCount++;
         tile.state.StateDestroy();
         // уничтожение Danger тайлов врага
         for (int i = 0; i < dangersNum; i++)

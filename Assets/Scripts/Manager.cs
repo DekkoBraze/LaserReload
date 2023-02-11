@@ -32,7 +32,8 @@ public class Manager : MonoBehaviour
 
     public Tile clickedTile { get; set; }
     public bool isMenuOn { get; set; } = false;
-    public static int stepCount { get; set; } = 0;
+    public bool isCompleteScreenOn { get; set; } = false;
+    public int stepCount { get; set; } = 0;
     public bool isItOver { get; set; }
 
     private void Awake()
@@ -62,7 +63,7 @@ public class Manager : MonoBehaviour
         {
             ReloadScene();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!isCompleteScreenOn && Input.GetKeyDown(KeyCode.Escape))
         {
             Messenger.Broadcast(GameEvent.BUTTON_SOUND);
             isMenuOn = !isMenuOn;
@@ -79,8 +80,6 @@ public class Manager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        
-
         yield return new WaitForSeconds(1);
 
         
@@ -97,18 +96,23 @@ public class Manager : MonoBehaviour
     public void CompleteTextAppear()
     {
         completeScreen.SetActive(true);
+        isCompleteScreenOn = true;
+        isMenuOn = !isMenuOn;
         stepCount = 0;
     }
 
     public void OnPlayerDestroy()
     {
         gameOverScreen.SetActive(true);
+        isCompleteScreenOn = true;
+        isMenuOn = !isMenuOn;
         stepCount = 0;
     }
 
     public void ReloadScene()
     {
         Messenger.Broadcast(GameEvent.RELOAD_LEVEL_SOUND);
+        isCompleteScreenOn = false;
         stepCount = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

@@ -232,7 +232,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -366,7 +366,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -378,7 +378,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -512,7 +512,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -524,7 +524,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
@@ -1055,7 +1055,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -1067,7 +1067,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -1585,6 +1585,14 @@ PrefabInstance:
       value: MusicToggle
       objectReference: {fileID: 0}
     - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUILevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GUILevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 0}
@@ -2072,7 +2080,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -2084,7 +2092,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -2242,7 +2250,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -2511,7 +2519,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -2523,7 +2531,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -2704,8 +2712,12 @@ PrefabInstance:
       value: SoundToggle
       objectReference: {fileID: 0}
     - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUILevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: GUILevelManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -3012,41 +3024,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
-      propertyPath: mainMenu
-      value: 
-      objectReference: {fileID: 285943266}
-    - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
-      propertyPath: levelMenu
-      value: 
-      objectReference: {fileID: 657590310}
-    - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
-      propertyPath: musicToggle
-      value: 
-      objectReference: {fileID: 473562847}
-    - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
-      propertyPath: soundToggle
-      value: 
-      objectReference: {fileID: 1104443712}
-    - target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
-      propertyPath: howToPlayMenu
-      value: 
-      objectReference: {fileID: 1811107627}
     - target: {fileID: 315656273396497005, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
       propertyPath: m_Name
       value: GUIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5517693106307459019, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 285943266}
+    - target: {fileID: 5517693106307459019, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: levelMenu
+      value: 
+      objectReference: {fileID: 657590310}
+    - target: {fileID: 5517693106307459019, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: musicToggle
+      value: 
+      objectReference: {fileID: 473562847}
+    - target: {fileID: 5517693106307459019, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: soundToggle
+      value: 
+      objectReference: {fileID: 1104443712}
+    - target: {fileID: 5517693106307459019, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: howToPlayMenu
+      value: 
+      objectReference: {fileID: 1811107627}
+    - target: {fileID: 7157573097203471007, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 285943266}
+    - target: {fileID: 7157573097203471007, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: levelMenu
+      value: 
+      objectReference: {fileID: 657590310}
+    - target: {fileID: 7157573097203471007, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: musicToggle
+      value: 
+      objectReference: {fileID: 473562847}
+    - target: {fileID: 7157573097203471007, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: soundToggle
+      value: 
+      objectReference: {fileID: 1104443712}
+    - target: {fileID: 7157573097203471007, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: howToPlayMenu
+      value: 
+      objectReference: {fileID: 1811107627}
+    - target: {fileID: 7157573097203471007, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+      propertyPath: fullscreenToggle
+      value: 
+      objectReference: {fileID: 6982248652938642490}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
 --- !u!114 &1285295317 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7157573097203471007, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
   m_PrefabInstance: {fileID: 1285295316}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb2d075be51bb0e40bf4642a5eb62847, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a4bb98c971c0704fa1907f5129207f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1289134010 stripped
@@ -3253,7 +3289,8 @@ MonoBehaviour:
     accumulates as you walk: one tile is one charge, maximum is 4. The charge counter
     is the robot's eyes: the more they are filled with energy, the more charge he
     has.\nIn the dungeon you will meet turrets that can incinerate the hero with
-    their deadly lasers.\nUse R button to reload level.\nGood luck!"
+    their deadly lasers.\nUse Left Mouse Button to walk and destroy enemies.\nUse
+    R button to reload level.\nGood luck!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
   m_sharedMaterial: {fileID: -3799218796454729819, guid: 795753bbdcea31e44b3e95e08401d65f, type: 2}
@@ -3496,8 +3533,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 1285295317}
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -3655,7 +3692,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -3667,7 +3704,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -4289,8 +4326,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 315656273396497003, guid: fa05b8435bd926f41aaf179b98ae9f9d, type: 3}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 1285295317}
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -4448,7 +4485,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -4460,7 +4497,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -4902,7 +4939,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -4914,7 +4951,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -5048,7 +5085,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -5060,7 +5097,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -5481,7 +5518,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: ButtonSoundBroadcast
         m_Mode: 1
         m_Arguments:
@@ -5493,7 +5530,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1285295317}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: GUILevelManager, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 2
         m_Arguments:
@@ -5881,6 +5918,14 @@ PrefabInstance:
       value: FullScreenToggle
       objectReference: {fileID: 0}
     - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUILevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GUILevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 0}
@@ -5907,9 +5952,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6982248654200183683, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
   m_PrefabInstance: {fileID: 6982248652938642488}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6982248652938642490}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6982248652938642490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6982248654200183681, guid: 0ff1a8e700ec01542bfd287533911752, type: 3}
+  m_PrefabInstance: {fileID: 6982248652938642488}
+  m_PrefabAsset: {fileID: 0}

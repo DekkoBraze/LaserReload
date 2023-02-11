@@ -8,15 +8,24 @@ public class GUILevelManager : MonoBehaviour
 {
     [SerializeField] private Sprite toggleFalse;
     [SerializeField] private Sprite toggleTrue;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject levelMenu;
+    [SerializeField] private GameObject howToPlayMenu;
     [SerializeField] private GameObject musicToggle;
     [SerializeField] private GameObject soundToggle;
+    [SerializeField] private GameObject fullscreenToggle;
     [SerializeField] private GameObject menu;
 
-    bool isFullScreen = false;
+    bool isMainMenuOn = true;
+
+    static bool isFullScreen = true;
 
     private void Awake()
     {
-        isFullScreen = Screen.fullScreen;
+        if (mainMenu == null)
+        {
+            isMainMenuOn = false;
+        }
         if (MusicManager.isMusicOn)
         {
             musicToggle.GetComponent<Image>().sprite = toggleTrue;
@@ -32,6 +41,36 @@ public class GUILevelManager : MonoBehaviour
         else
         {
             soundToggle.GetComponent<Image>().sprite = toggleFalse;
+        }
+        if (isFullScreen)
+        {
+            fullscreenToggle.GetComponent<Image>().sprite = toggleTrue;
+        }
+        else
+        {
+            fullscreenToggle.GetComponent<Image>().sprite = toggleFalse;
+        }
+    }
+
+    private void Update()
+    {
+        if (isMainMenuOn)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (levelMenu.activeSelf)
+                {
+                    Messenger.Broadcast(GameEvent.BUTTON_SOUND);
+                    mainMenu.SetActive(true);
+                    levelMenu.SetActive(false);
+                }
+                if (howToPlayMenu.activeSelf)
+                {
+                    Messenger.Broadcast(GameEvent.BUTTON_SOUND);
+                    mainMenu.SetActive(true);
+                    howToPlayMenu.SetActive(false);
+                }
+            }
         }
     }
 

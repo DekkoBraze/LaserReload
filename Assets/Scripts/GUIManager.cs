@@ -54,6 +54,7 @@ public class GUIManager : MonoBehaviour
             }
         }
     }
+    //Единственное существенное отличие - Update. Можно сделать булевую переменную, которая отслеживает, какое меню открыто и объединить два скрипта
 
     public void StartLevel(GameObject scene)
     {

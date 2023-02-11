@@ -14,7 +14,7 @@ public abstract class ACantKill : MonoBehaviour
     {
         Messenger.Broadcast(GameEvent.STEP_SOUND);
         // смена хода для двигающихся тайлов
-        Manager.stepCount++;
+        Manager.link.stepCount++;
         Messenger.Broadcast(GameEvent.NEXT_STEP);
         Messenger.Broadcast(GameEvent.DANGER_SPAWN);
         if (enemyLord != null)

@@ -319,6 +319,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4653339185309431646, guid: b0c90155a56241e4083e87d878e8f81a, type: 3}
   m_PrefabInstance: {fileID: 190963427}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &308644110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7157573096703530416, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+  m_PrefabInstance: {fileID: 1360092588}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4bb98c971c0704fa1907f5129207f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &341021575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2686,6 +2697,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3464518558475351234, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 3464518558475351234, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 3464518558475351234, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonSoundBroadcast
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464518558475351234, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FullScreenToggle
+      objectReference: {fileID: 0}
     - target: {fileID: 5832618285729882052, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2774,6 +2801,86 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5832618286786059355, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 5832618286786059355, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 5832618286786059355, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonSoundBroadcast
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618286786059355, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618286892400748, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 5832618286892400748, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 5832618286892400748, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonSoundBroadcast
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618286892400748, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248653385744640, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 6982248653385744640, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 6982248653385744640, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonSoundBroadcast
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248653385744640, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SoundToggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248654590678154, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 6982248654590678154, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 308644110}
+    - target: {fileID: 6982248654590678154, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonSoundBroadcast
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982248654590678154, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: MusicToggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157573096703530416, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 1360092589}
+    - target: {fileID: 7157573096703530416, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: musicToggle
+      value: 
+      objectReference: {fileID: 1360092595}
+    - target: {fileID: 7157573096703530416, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: soundToggle
+      value: 
+      objectReference: {fileID: 1360092594}
+    - target: {fileID: 7157573096703530416, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: fullscreenToggle
+      value: 
+      objectReference: {fileID: 1360092593}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
 --- !u!1 &1360092589 stripped
@@ -2802,6 +2909,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1360092593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3464518558475351232, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+  m_PrefabInstance: {fileID: 1360092588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1360092594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6982248653385744642, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+  m_PrefabInstance: {fileID: 1360092588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1360092595 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6982248654590678152, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+  m_PrefabInstance: {fileID: 1360092588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1427388183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8521767488666497852, guid: 25539673ab515bb49b5422d9e0073f50, type: 3}

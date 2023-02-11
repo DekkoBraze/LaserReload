@@ -51,7 +51,7 @@ public class MovableTurretState : AMayKill, IState
             int dangersNum = dangerTilesNumber;
             Tile[] dangers = dangerTiles;
             // смена хода для двигающихся тайлов
-            Manager.stepCount++;
+            Manager.link.stepCount++;
             // уничтожение Danger тайлов врага
             for (int i = 0; i < dangersNum; i++)
             {
@@ -71,9 +71,9 @@ public class MovableTurretState : AMayKill, IState
     {
         if (teleportTiles.Length > 0)
         {
-            if (teleportTiles[Manager.stepCount % teleportTiles.Length] != null)
+            if (teleportTiles[Manager.link.stepCount % teleportTiles.Length] != null)
             {
-                tile.gameObject.transform.position = teleportTiles[Manager.stepCount % teleportTiles.Length];
+                tile.gameObject.transform.position = teleportTiles[Manager.link.stepCount % teleportTiles.Length];
             }
             else
             {
