@@ -87,5 +87,4 @@ public class Tile : MonoBehaviour
         Messenger.RemoveListener(GameEvent.CHECK_MOVABLE_TURRET, AwakeCheckMovableTurretMove); 
     }
 }
-// Убрать баг, при котором данжер тайлы не успевают удалиться после убийства врага и игрок умирает
-// Найти нормальные шрифты (а не это васянство ебаное)
+// Исправить баг с неисчезающими после смерти врага спрайтами

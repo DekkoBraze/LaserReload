@@ -43,7 +43,7 @@ public abstract class AMayKill : MonoBehaviour
         Tile[] dangers = dangerTiles;
         // смена хода для двигающихся тайлов
         Manager.link.stepCount++;
-        tile.state.StateDestroy();
+        //Удалил отсюда повторение первой строки!!!
         // уничтожение Danger тайлов врага
         for (int i = 0; i < dangersNum; i++)
         {
@@ -63,7 +63,8 @@ public abstract class AMayKill : MonoBehaviour
         // изменение типа врага на Empty
         tile.gameObject.AddComponent<EmptyState>();
         Destroy(tile.gameObject.GetComponent<TurretState>());
-        Destroy(tile.gameObject.GetComponent<Animator>());
+        tile.GetComponent<Animator>().enabled = false;
+        //Destroy(tile.gameObject.GetComponent<Animator>());
         tile.state = GetComponent<EmptyState>();
         tile.state.ChangeOnSafe(tile);
         tile.gameObject.transform.eulerAngles = Manager.angle0.angleCoord;
