@@ -724,7 +724,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -928,6 +928,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5832618285895274300, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618286280642389, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5832618286786059355, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -959,6 +967,10 @@ PrefabInstance:
     - target: {fileID: 5832618286892400748, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: StartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832618287112323009, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6982248653385744640, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1007,7 +1019,7 @@ PrefabInstance:
     - target: {fileID: 7157573096703530416, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: fullscreenToggle
       value: 
-      objectReference: {fileID: 620851424}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
 --- !u!1 &620851419 stripped
@@ -1047,11 +1059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4bb98c971c0704fa1907f5129207f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &620851424 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3464518558475351232, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
-  m_PrefabInstance: {fileID: 620851418}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &620851425 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6982248653385744642, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}

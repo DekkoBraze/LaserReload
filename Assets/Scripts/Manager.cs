@@ -63,7 +63,7 @@ public class Manager : MonoBehaviour
         {
             ReloadScene();
         }
-        if (!isCompleteScreenOn && Input.GetKeyDown(KeyCode.Escape))
+        if (!isCompleteScreenOn && Input.GetKeyDown(KeyCode.Q))
         {
             Messenger.Broadcast(GameEvent.BUTTON_SOUND);
             isMenuOn = !isMenuOn;

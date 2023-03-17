@@ -13,12 +13,10 @@ public class GUILevelManager : MonoBehaviour
     [SerializeField] private GameObject howToPlayMenu;
     [SerializeField] private GameObject musicToggle;
     [SerializeField] private GameObject soundToggle;
-    [SerializeField] private GameObject fullscreenToggle;
     [SerializeField] private GameObject menu;
 
     bool isMainMenuOn = true;
 
-    static bool isFullScreen = true;
 
     private void Awake()
     {
@@ -41,14 +39,6 @@ public class GUILevelManager : MonoBehaviour
         else
         {
             soundToggle.GetComponent<Image>().sprite = toggleFalse;
-        }
-        if (isFullScreen)
-        {
-            fullscreenToggle.GetComponent<Image>().sprite = toggleTrue;
-        }
-        else
-        {
-            fullscreenToggle.GetComponent<Image>().sprite = toggleFalse;
         }
     }
 
@@ -90,6 +80,7 @@ public class GUILevelManager : MonoBehaviour
         Application.Quit();
     }
 
+    /*
     public void FullScreenToggle(Button button)
     {
         isFullScreen = !isFullScreen;
@@ -103,6 +94,7 @@ public class GUILevelManager : MonoBehaviour
             button.image.sprite = toggleFalse;
         }
     }
+    */
 
     public void SoundToggle(Button button)
     {
