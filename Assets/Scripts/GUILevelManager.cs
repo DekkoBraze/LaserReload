@@ -11,34 +11,40 @@ public class GUILevelManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject levelMenu;
     [SerializeField] private GameObject howToPlayMenu;
-    [SerializeField] private GameObject musicToggle;
-    [SerializeField] private GameObject soundToggle;
     [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject locks;
+    public GameObject pause;
 
     bool isMainMenuOn = true;
 
 
     private void Awake()
     {
+        Messenger.AddListener(GameEvent.CHANGE_PAUSE_BUTTON_VISABILITY, ChangePauseButtonVisability);
+
         if (mainMenu == null)
         {
             isMainMenuOn = false;
         }
-        if (MusicManager.isMusicOn)
+    }
+
+    private void Start()
+    {
+        if (locks != null)
         {
-            musicToggle.GetComponent<Image>().sprite = toggleTrue;
-        }
-        else
-        {
-            musicToggle.GetComponent<Image>().sprite = toggleFalse;
-        }
-        if (SoundManager.isSoundOn)
-        {
-            soundToggle.GetComponent<Image>().sprite = toggleTrue;
-        }
-        else
-        {
-            soundToggle.GetComponent<Image>().sprite = toggleFalse;
+            foreach (Transform g in locks.transform.GetComponentsInChildren<Transform>())
+            {
+                if (g.name == "Locks")
+                {
+                    continue;
+                }
+                int lockNum = int.Parse(g.name);
+                int unlockedLevels = PlayerPrefs.GetInt("LevelCounter") + 1;
+                if (lockNum <= unlockedLevels)
+                {
+                    g.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -69,11 +75,24 @@ public class GUILevelManager : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
+    public void StartLevelFromMenu(GameObject scene)
+    {
+        string nextName = scene.name.Substring(5);
+        int sceneNum = int.Parse(nextName);
+        int keyNum;
+        keyNum = PlayerPrefs.GetInt("LevelCounter", 0) + 1;
+        if (sceneNum <= keyNum)
+        {
+            SceneManager.LoadScene(scene.name);
+        }
+    }
+
     public void Continue()
     {
         Manager.link.isItOver = false;
         Manager.link.isMenuOn = false;
         menu.SetActive(false);
+        pause.SetActive(!Manager.link.isMenuOn);
     }
     public void Exit()
     {
@@ -137,5 +156,23 @@ public class GUILevelManager : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PauseButton()
+    {
+        Manager.link.isItOver = true;
+        Manager.link.isMenuOn = true;
+        menu.SetActive(true);
+        pause.SetActive(!Manager.link.isMenuOn);
+    }
+
+    public void ChangePauseButtonVisability()
+    {
+        pause.SetActive(!Manager.link.isMenuOn);
+    }
+
+    private void OnDestroy()
+    {
+        Messenger.RemoveListener(GameEvent.CHANGE_PAUSE_BUTTON_VISABILITY, ChangePauseButtonVisability);
     }
 }

@@ -69,6 +69,7 @@ public class Manager : MonoBehaviour
             isMenuOn = !isMenuOn;
             menu.SetActive(isMenuOn);
             isItOver = isMenuOn;
+            Messenger.Broadcast(GameEvent.CHANGE_PAUSE_BUTTON_VISABILITY);
         }
     }
 
@@ -82,7 +83,6 @@ public class Manager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -99,14 +99,25 @@ public class Manager : MonoBehaviour
         isCompleteScreenOn = true;
         isMenuOn = !isMenuOn;
         stepCount = 0;
+        Messenger.Broadcast(GameEvent.CHANGE_PAUSE_BUTTON_VISABILITY);
+        int num;
+        string sceneName;
+        sceneName = SceneManager.GetActiveScene().name;
+        if (PlayerPrefs.GetInt(sceneName, 0) == 0)
+        {
+            PlayerPrefs.SetInt(sceneName, 1);
+            num = PlayerPrefs.GetInt("LevelCounter", 0) + 1;
+            PlayerPrefs.SetInt("LevelCounter", num);
+        }
     }
 
     public void OnPlayerDestroy()
     {
         gameOverScreen.SetActive(true);
         isCompleteScreenOn = true;
-        isMenuOn = !isMenuOn;
+        isMenuOn = true;
         stepCount = 0;
+        Messenger.Broadcast(GameEvent.CHANGE_PAUSE_BUTTON_VISABILITY);
     }
 
     public void ReloadScene()

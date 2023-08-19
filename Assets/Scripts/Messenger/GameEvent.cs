@@ -15,4 +15,5 @@ public static class GameEvent
     public const string ON_SOUND = "ON_SOUND";
     public const string OFF_MUSIC = "OFF_MUSIC";
     public const string ON_MUSIC = "ON_MUSIC";
+    public const string CHANGE_PAUSE_BUTTON_VISABILITY = "CHANGE_PAUSE_BUTTON_VISABILITY";
 }

@@ -63,12 +63,13 @@ public abstract class AMayKill : MonoBehaviour
         // изменение типа врага на Empty
         tile.gameObject.AddComponent<EmptyState>();
         Destroy(tile.gameObject.GetComponent<TurretState>());
-        Destroy(tile.gameObject.GetComponent<Animator>());
-        tile.state = GetComponent<EmptyState>();
+        //Destroy(tile.gameObject.GetComponent<Animator>());
+        tile.state = tile.gameObject.GetComponent<EmptyState>();
         tile.state.ChangeOnSafe(tile);
         tile.gameObject.transform.eulerAngles = Manager.angle0.angleCoord;
         Messenger.Broadcast(GameEvent.NEXT_STEP);
         Messenger.Broadcast(GameEvent.DANGER_SPAWN);
+        tile.gameObject.GetComponent<Animator>().enabled = false;
     }
 
     public void DangerTilesSpawn(Tile tile)
