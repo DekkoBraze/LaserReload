@@ -12,6 +12,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject completeScreen;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject soundManager;
+    public GameObject adsObject;
 
     public static Angle0 angle0;
     public static Angle90 angle90;
@@ -55,6 +56,7 @@ public class Manager : MonoBehaviour
     private void Start()
     {
         isItOver = false;
+        adsObject = GameObject.Find("StartAds");
     }
 
     private void Update()
@@ -103,6 +105,7 @@ public class Manager : MonoBehaviour
         int num;
         string sceneName;
         sceneName = SceneManager.GetActiveScene().name;
+        adsObject.GetComponent<AdsYandex>().Show1();
         if (PlayerPrefs.GetInt(sceneName, 0) == 0)
         {
             PlayerPrefs.SetInt(sceneName, 1);
@@ -126,5 +129,21 @@ public class Manager : MonoBehaviour
         isCompleteScreenOn = false;
         stepCount = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void SkipLevel()
+    {
+        Messenger.Broadcast(GameEvent.ON_MUSIC);
+        int num;
+        string sceneName;
+        sceneName = SceneManager.GetActiveScene().name;
+        if (PlayerPrefs.GetInt(sceneName, 0) == 0)
+        {
+            PlayerPrefs.SetInt(sceneName, 1);
+            num = PlayerPrefs.GetInt("LevelCounter", 0) + 1;
+            PlayerPrefs.SetInt("LevelCounter", num);
+        }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

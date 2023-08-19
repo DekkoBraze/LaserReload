@@ -72,6 +72,7 @@ public class GUILevelManager : MonoBehaviour
 
     public void StartLevel(GameObject scene)
     {
+        Messenger.Broadcast(GameEvent.ON_MUSIC);
         SceneManager.LoadScene(scene.name);
     }
 
@@ -156,6 +157,7 @@ public class GUILevelManager : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Messenger.Broadcast(GameEvent.ON_MUSIC);
     }
 
     public void PauseButton()
@@ -164,6 +166,11 @@ public class GUILevelManager : MonoBehaviour
         Manager.link.isMenuOn = true;
         menu.SetActive(true);
         pause.SetActive(!Manager.link.isMenuOn);
+    }
+
+    public void StartSkipAds()
+    {
+        Manager.link.adsObject.GetComponent<AdsYandex>().Show2();
     }
 
     public void ChangePauseButtonVisability()

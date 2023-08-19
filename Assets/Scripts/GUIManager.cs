@@ -58,6 +58,7 @@ public class GUIManager : MonoBehaviour
 
     public void StartLevel(GameObject scene)
     {
+        Messenger.Broadcast(GameEvent.ON_MUSIC);
         SceneManager.LoadScene(scene.name);
     }
 
