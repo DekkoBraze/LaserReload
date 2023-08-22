@@ -353,7 +353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &285336849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1716,6 +1716,7 @@ MonoBehaviour:
   completeScreen: {fileID: 1880160321}
   gameOverScreen: {fileID: 954878140}
   soundManager: {fileID: 8925960942708982843, guid: 2c84b066280a21244b376014942cf20d, type: 3}
+  adsObject: {fileID: 0}
   turretTiles:
   - {fileID: 21300000, guid: 65246431e68bf5b49a8d4f6b49a9d384, type: 3}
   - {fileID: 21300000, guid: 8f1aff5632b04e64bbe55bc7bb276fb3, type: 3}
@@ -1880,6 +1881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -2151,7 +2153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1842911574
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2545,6 +2547,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4698218134318774247, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5832618285729882052, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2638,6 +2644,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5832618286280642389, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077881024002609568, guid: 3a92846c6f15f9c44852b5e23bd1ea5b, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
