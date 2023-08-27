@@ -170,7 +170,7 @@ public class GUILevelManager : MonoBehaviour
 
     public void StartSkipAds()
     {
-        Manager.link.adsObject.GetComponent<AdsYandex>().Show2();
+        //Manager.link.adsObject.GetComponent<AdsYandex>().Show2();
     }
 
     public void ChangePauseButtonVisability()

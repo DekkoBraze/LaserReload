@@ -105,7 +105,7 @@ public class Manager : MonoBehaviour
         int num;
         string sceneName;
         sceneName = SceneManager.GetActiveScene().name;
-        adsObject.GetComponent<AdsYandex>().Show1();
+        //adsObject.GetComponent<AdsYandex>().Show1();
         if (PlayerPrefs.GetInt(sceneName, 0) == 0)
         {
             PlayerPrefs.SetInt(sceneName, 1);

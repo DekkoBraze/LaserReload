@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3383887712250137526}
-  - component: {fileID: 3773353601800804403}
+  - component: {fileID: 306923609975939184}
   m_Layer: 0
   m_Name: StartAds
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3773353601800804403
+--- !u!114 &306923609975939184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6070577989168286433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fd3e62995912d3468486abb4ef5bf0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 7de97bca9ce8c554d85d418de77f5a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sdk: {fileID: 0}
+  coins: 0
+  coinsTxt: {fileID: 0}
